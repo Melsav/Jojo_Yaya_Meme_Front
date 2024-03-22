@@ -1,0 +1,194 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #90CAF9, #266598);
+    display: flex;
+    font-family: 'Arial Narrow Bold', sans-serif;
+    animation: gradientFade 2s ease-in-out forwards;
+}
+
+@keyframes gradientFade {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+h1 {
+
+    position: relative;
+    margin-top: 100px;
+    margin-right: auto;
+    margin-left: auto;
+    color:rgb(177, 231, 235);
+
+
+}
+
+header {
+    width: 100%;
+    background-color: #333; /* Couleur de fond du header */
+    height: 70px;
+    position: fixed; /* Position fixée pour rester en haut de la page */
+    top: 0; /* Coller le header en haut de la page */
+    
+}
+
+#Reg {
+
+    position: absolute;
+    right: 80px;
+    color: white;
+    top:23px;
+    
+
+
+}
+
+#Log {
+
+    position: relative;
+    margin-left: 1035px;
+    color: white;
+    top: 23px;
+
+
+}
+
+#Home {
+
+    position: inherit;
+    right: 320px;
+    color: white;
+    top:23px;
+
+}
+
+#Prev {
+
+    position: relative;
+    right: 350px;
+    color: white;
+    top:23px;
+    text-decoration: none;
+
+}
+
+#Map {
+
+    position: relative;
+    right: 570px;
+    color: white;
+    top:23px;
+    text-decoration: none;
+
+}
+
+#Account {
+
+    position: inherit;
+    right: 1160px;
+    color: white;
+    top:23px;
+
+}
+
+#fen {
+
+    width: 500px;
+    height: 330px;
+    background-color: rgba(255, 249, 238, 0.5);
+    border-radius: 15px;
+    border: 1px solid black;
+    position: absolute;
+    top: 60%; /* Déplacer la div à 50% de la hauteur de la fenêtre */
+    left: 50%; /* Déplacer la div à 50% de la largeur de la fenêtre */
+    transform: translate(-50%, -50%); /* Centrer la div par rapport à son propre contenu */
+    
+}
+
+/*
+
+*/
+
+#label_log {
+
+    color: white;
+    position: relative;
+    margin-left: 75px;
+    margin-top: 30px;
+
+}
+
+#label_pwd {
+
+    color: white;
+    position: relative;
+    margin-left: 75px;
+    margin-top: 35px;
+
+
+
+}
+#pseudo {
+
+    width: 350px;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding-inline-start: 18px;
+    height: 30px;
+    margin-left: 70px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-top: 15px;
+    
+
+
+}
+
+#pwd {
+
+    width: 350px;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding-inline-start: 18px;
+    height: 30px;
+    margin-left: 70px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-top: 12px;
+
+
+}
+
+
+
+
+
+#eclair {
+
+    position: absolute;
+    height: 80px;
+    width: 185px;
+    right: 160px;
+    top: 82px;
+
+}
+
+#rain {
+
+    position: absolute;
+    height: 80px;
+    width: 95px;
+    left: 200px;
+    top: 82px;
+
+}
+
+
