@@ -12,10 +12,10 @@
         <nav>
             <ul class="nav_links">
                 <li><a href="#">Accueil</a></li>
-                <li><a href="prevision_meteo.html">Prévisions</a></li>
-                <li><a href="home.html">Météo Spatiale</a></li>
-                <li><a href="map.html">Map</a></li>
-                <li><a href="#">Profil</a></li>
+                <li><a href="weather/prevision_meteo.html">Prévisions</a></li>
+                <li><a href="#">Actualités Météo</a></li>
+                <li><a href="weather/map.html">Map</a></li>
+                <li><a href="#">Contact</a></li>
             </ul>
         </nav>
         <div class="button-container">
@@ -46,14 +46,14 @@
         </section>
         <script>
             document.getElementById('signup-form').onsubmit = function(event) {
-    event.preventDefault(); 
+    event.preventDefault(); // Empêcher la soumission du formulaire par défaut
 
     var form = event.target;
     var password = form.password.value;
     var confirmPassword = form.confirmPassword.value;
     var messageContainer = document.getElementById('message-container');
 
-    
+    // Efface le message précédent s'il existe
     messageContainer.innerHTML = '';
 
     if (password !== confirmPassword) {
@@ -61,15 +61,18 @@
         return false;
     }
 
-    
+    // Préparation des données à envoyer
     var formData = {
         username: form.username.value,
         email: form.email.value,
-        password: password, 
+        password: password, // Normalement, vous ne voudriez pas envoyer ceci en clair !
     };
 
-    
-    fetch('/register', {
+    // API
+    const apiUrl = "http://localhost:3000"
+
+    // Utiliser fetch pour envoyer les données au serveur
+    fetch(`${apiUrl}/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -79,8 +82,9 @@
     .then(response => response.json())
     .then(data => {
         console.log('Success:', data);
+        // Afficher un message de succès dans le conteneur prévu à cet effet
         messageContainer.innerHTML = '<p style="color: green;">Utilisateur inscrit avec succès.</p>';
-        form.reset(); 
+        form.reset(); // Réinitialiser les champs du formulaire
         
     })
     .catch((error) => {
@@ -99,3 +103,5 @@
     <script src="script.js"></script>
 </body>
 </html>
+
+
