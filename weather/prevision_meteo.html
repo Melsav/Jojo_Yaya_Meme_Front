@@ -24,6 +24,7 @@
     <div id="forecast-container" class="cadran"></div>
 
     <script>
+        const apiUrl = "http://localhost:3000";
         function getForecast() {
             var cityName = document.getElementById('city-input').value;
             const apiKey = 'ae389c751139d10e6c783635a12a3b6e';
@@ -113,23 +114,24 @@
         }
 
         function addToSearchHistory(cityName, weatherDetails) {
-            fetch('/weather/history', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ city: cityName, details: weatherDetails })
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erreur lors de l\'enregistrement de la ville et des détails météo dans l\'historique');
-                }
-                console.log('Ville et détails météo ajoutés à l\'historique');
-            })
-            .catch(error => {
-                console.error('Erreur lors de l\'enregistrement de la ville et des détails météo dans l\'historique', error);
-            });
+    fetch(`${apiUrl}/weather/history`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ city: cityName, details: weatherDetails })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erreur lors de l\'enregistrement de la ville et des détails météo dans l\'historique');
         }
+        console.log('Ville et détails météo ajoutés à l\'historique');
+    })
+    .catch(error => {
+        console.error('Erreur lors de l\'enregistrement de la ville et des détails météo dans l\'historique', error);
+    });
+}
+
     </script>
 </div>
 

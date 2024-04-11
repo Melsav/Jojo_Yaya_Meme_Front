@@ -9,35 +9,53 @@
 </head>
 <body>
     <h1>Historique des recherches</h1>
+
+    <div class="history-container">
     <ul id="search-history"></ul>
+    </div>
+    
+    <button id="btn_home">Back to Home</button>
 
     <script>
-        // Récupération de l'historique des recherches depuis le backend
-        fetch('/weather/history')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Réponse non valide du backend');
-                }
-                return response.json();
-            })
-            .then(history => {
-                // Ajout des villes et détails de l'historique dans la liste
-                const searchHistory = document.getElementById('search-history');
-                history.forEach(item => {
-    const listItem = document.createElement('li');
-    // Vérifie si 'details' existe avant de construire la chaîne de texte
-    if (item.details) {
-        listItem.textContent = `${item.city} : Température ${item.details.temp}°C, ${item.details.description}`;
-    } else {
-        // Gestion des cas où 'details' n'est pas défini
-        listItem.textContent = `${item.city} : Détails non disponibles`;
-    }
-    searchHistory.appendChild(listItem);
-});
-            })
-            .catch(error => {
-                console.error('Erreur lors de la récupération de l\'historique des recherches', error);
-            });
+     const apiUrl = "http://localhost:3000";
+
+
+fetch(`${apiUrl}/weather/data`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Réponse non valide du backend');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Sélection de l'élément HTML où vous voulez afficher les données météo
+        const searchHistory = document.getElementById('search-history');
+
+        // Itération sur chaque objet météo dans le tableau
+        data.forEach(item => {
+            // Création d'un élément <li> pour afficher les informations météo
+            const listItem = document.createElement('li');
+            // Construction du texte à afficher pour chaque entrée météo
+            const text = `${item.city} : Température ${item.temperature}°C, ${item.description}`;
+            // Attribution du texte à l'élément <li>
+            listItem.textContent = text;
+            // Ajout de l'élément <li> à l'élément où vous voulez afficher les données
+            searchHistory.appendChild(listItem);
+        });
+    })
+    .catch(error => {
+        console.error('Erreur lors de la récupération des données météo:', error);
+    });
+
+    document.getElementById('btn_home').addEventListener('click', function() {
+            window.location.href = '../authent/register.html'; 
+        });
+
+
+
+
+
+
 
             
     </script>
