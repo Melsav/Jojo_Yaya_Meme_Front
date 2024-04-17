@@ -1,4 +1,4 @@
-const apiUrl = "http://localhost:3000"; // Remplacez par l'URL de votre backend
+const apiUrl = "http://127.0.0.1:3000"; // Remplacez par l'URL de votre backend
 
 function displaySearchHistory() {
     fetch(`${apiUrl}/weather/history`) // Endpoint backend pour l'historique des recherches

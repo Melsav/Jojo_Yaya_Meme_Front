@@ -4,7 +4,7 @@ const btnConnexionAnonyme = document.getElementById('btnConnexionAnonyme');
 // Ajouter un écouteur d'événements au clic sur le bouton
 btnConnexionAnonyme.addEventListener('click', () => {
     // Envoi d'une requête au backend pour enregistrer la connexion anonyme
-    fetch('http://localhost:3000/login/anon', {
+    fetch('http://127.0.0.1:3000/login/anon', {
         method: 'POST',
     })
     .then(response => {

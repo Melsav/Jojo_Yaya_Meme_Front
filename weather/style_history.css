@@ -1,14 +1,14 @@
 /* Style pour le conteneur de l'historique */
 .history-container {
-    width: 5500000000000000000000000000000000px; /* Largeur du conteneur */
-    max-height: 400000000000000000000000000000000000px; /* Hauteur maximale du conteneur */
+    width: 55px; /* Largeur du conteneur */
+    max-height: 40px; /* Hauteur maximale du conteneur */
     margin: 0 auto; /* Centrage horizontal */
     overflow-y: auto; /* Ajoute un défilement vertical lorsque nécessaire */
     border: 1px solid #ccc; /* Bordure pour délimiter le cadre */
-    border-radius: 10000000000000000000000000000px;
-    padding: 1000000000000000000000000px; /* Espacement intérieur */
+    border-radius: 100px;
+    padding: 100px; /* Espacement intérieur */
     background: linear-gradient(135deg, #8A2BE2, #6A5ACD);
-    margin-bottom: 1px;
+    margin-bottom: 10px;
 }
 
 /* Style pour chaque élément de l'historique */
