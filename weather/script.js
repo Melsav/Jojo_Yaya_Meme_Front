@@ -1,35 +1,45 @@
-function getWeather() {
-    var villeInput = document.getElementById('ville');
-    var ville = villeInput.value;
+const apiUrl = "http://localhost:3000"; // Remplacez par l'URL de votre backend
 
-    // Remplacez 'VOTRE_CLE_API' par votre clé API OpenWeatherMap
-    var apiKey = 'ae389c751139d10e6c783635a12a3b6e';
-    var apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + ville + '&units=metric&appid=' + apiKey;
-
-    // Utilisez une requête AJAX pour récupérer les données météo depuis l'API
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var reponse = JSON.parse(xhr.responseText);
-            afficherResultat(reponse);
-        }
-    };
-    xhr.open('GET', apiUrl, true);
-    xhr.send();
+function displaySearchHistory() {
+    fetch(`${apiUrl}/weather/history`) // Endpoint backend pour l'historique des recherches
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Réponse non valide du backend');
+            }
+            console.log("Réponse du backend reçue avec succès");
+            return response.json();
+        })
+        .then(data => {
+            const searchHistory = document.getElementById('search-history');
+            searchHistory.innerHTML = '';
+            console.log("Données météorologiques reçues:", data);
+            data.forEach(item => {
+                const listItem = document.createElement('li');
+                const text = `
+                    Ville: ${item.city}
+                    Température: ${item.temperature}°C
+                    Description: ${item.description}
+                `;
+                listItem.textContent = text;
+                searchHistory.appendChild(listItem);
+            });
+        })
+        .catch(error => {
+            console.error('Erreur lors de la récupération de l\'historique des recherches:', error);
+        });
 }
 
-function afficherResultat(data) {
-    var resultatMeteo = document.getElementById('resultatMeteo');
-    resultatMeteo.innerHTML = '';
+fetch(`${apiUrl}/weather/history`)
+    .then(response => response.json())
+    .then(data => {
+        console.log("Données météorologiques reçues:", data);
+        // Appel de la fonction avec les données météorologiques
+        // Remplacez afficherResultat par la fonction que vous utilisez pour afficher les résultats
+        afficherResultat(data);
+    })
+    .catch(error => {
+        console.error('Erreur lors de la récupération des données météorologiques:', error);
+    });
 
-    // Affichez les informations météo pertinentes ici, par exemple :
-    var temperature = '<strong>Température :</strong> ' + data.main.temp + '°C';
-    var humidite = '<strong>Humidité :</strong> ' + data.main.humidity + '%';
-    var vent = '<strong>Vitesse du vent :</strong> ' + data.wind.speed + ' m/s';
-
-    var resultHtml = '<p>' + temperature + '</p>';
-    resultHtml += '<p>' + humidite + '</p>';
-    resultHtml += '<p>' + vent + '</p>';
-
-    resultatMeteo.innerHTML = resultHtml;
-}
+// Appel de la fonction pour afficher l'historique lors du chargement de la page
+displaySearchHistory();

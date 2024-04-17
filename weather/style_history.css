@@ -86,4 +86,7 @@ ul#search-history li:hover {
     background-color: #621473; /* Changement de couleur au survol */
 }
 
-
+header img {
+    width: 50px; /* Définir la largeur souhaitée */
+    height: auto; /* Garder le rapport hauteur-largeur */
+}

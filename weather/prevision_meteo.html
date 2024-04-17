@@ -22,145 +22,133 @@
 
         <div id="forecast-container" class="cadran"></div>
 
-        <ul id="search-history"></ul>
+        <script>
+            const apiUrl = "http://localhost:3000";
+
+            function addToSearchHistory(cityName, weatherDetails) {
+                const sessionID = generateSessionID(); // Générer un identifiant de session unique
+
+                // Enregistrement dans la base de données avec l'identifiant de session
+                fetch(`${apiUrl}/weather/history`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ sessionID: sessionID, city: cityName, details: weatherDetails, userType: 'anonymous' }) // Enregistrement avec le type d'utilisateur "anonymous"
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erreur lors de l\'enregistrement de la ville et des détails météo dans l\'historique');
+                    }
+                    console.log('Ville et détails météo ajoutés à l\'historique');
+                })
+                .catch(error => {
+                    console.error('Erreur lors de l\'enregistrement de la ville et des détails météo dans l\'historique', error);
+                });
+            }
+
+            // Fonction pour générer un identifiant de session unique
+            function generateSessionID() {
+                // Générer un identifiant de session aléatoire (par exemple, à l'aide de bibliothèques comme uuid)
+                return 'session_id_123';
+            }
+
+            function getForecast() {
+                var cityName = document.getElementById('city-input').value;
+                const apiKey = 'ae389c751139d10e6c783635a12a3b6e';
+
+                fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&appid=${apiKey}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Réponse non valide de l\'API OpenWeatherMap');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        displayForecast(data); 
+
+                        const now = new Date();
+                        const tomorrow = new Date(now);
+                        tomorrow.setDate(now.getDate() + 1);
+                        const indexTomorrow = data.list.findIndex(forecast => {
+                            const forecastDate = new Date(forecast.dt_txt);
+                            return forecastDate.getDate() === tomorrow.getDate();
+                        });
+
+                        if (indexTomorrow !== -1) {
+                            const details = {
+                                temp: data.list[indexTomorrow].main.temp,
+                                description: data.list[indexTomorrow].weather[0].description
+                            };
+                            addToSearchHistory(cityName, details); 
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erreur lors de la récupération des données de prévision', error);
+                    });
+            }
+
+            function displayForecast(data) {
+                var forecastContainer = document.getElementById('forecast-container');
+                forecastContainer.innerHTML = '';
+
+                var dailyForecasts = groupByDay(data.list);
+
+                var daysToShow = Object.keys(dailyForecasts).slice(1, 6);
+
+                var lavenderColors = ['#6A5ACD', '#7B68EE', '#8A2BE2', '#9370DB', '#AB83A1'];
+
+                daysToShow.forEach((day, index) => {
+                    setTimeout(() => {
+                        var forecastElement = document.createElement('div');
+                        forecastElement.classList.add('day-forecast');
+
+                        var averageTemp = calculateAverageTemp(dailyForecasts[day]);
+
+                        var gradientColorStart = lavenderColors[index % lavenderColors.length];
+                        var gradientColorEnd = lavenderColors[(index + 1) % lavenderColors.length];
+                        forecastElement.style.background = `linear-gradient(to bottom, ${gradientColorStart}, ${gradientColorEnd})`;
+
+                        forecastElement.innerHTML = `
+                            <strong style="font-size: 1.2em;">${day}</strong>
+                            <div style="margin-top: 8px;">
+                                ${dailyForecasts[day][0].weather[0].description}, ${averageTemp} °C
+                            </div>
+                        `;
+                        forecastContainer.appendChild(forecastElement);
+
+                        forecastElement.style.opacity = 1;
+                    }, index * 500); 
+                });
+            }
+
+            function groupByDay(forecasts) {
+                return forecasts.reduce((grouped, forecast) => {
+                    var date = new Date(forecast.dt * 1000);
+                    var day = date.toLocaleDateString('fr-FR', { weekday: 'long' });
+
+                    if (!grouped[day]) {
+                        grouped[day] = [];
+                    }
+
+                    grouped[day].push(forecast);
+                    return grouped;
+                }, {});
+            }
+
+            function calculateAverageTemp(forecasts) {
+                var totalTemp = forecasts.reduce((sum, forecast) => sum + forecast.main.temp, 0);
+                return (totalTemp / forecasts.length).toFixed(1);
+            }
+        </script>
     </div>
 
     <button id="next_page" type="button" onclick="redirectToNextPage()">Revenir à l'accueil</button>
 
     <script>
-        const apiUrl = "http://localhost:3000";
-        
-        function getForecast() {
-            var cityName = document.getElementById('city-input').value;
-            const apiKey = 'ae389c751139d10e6c783635a12a3b6e';
-
-            fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&appid=${apiKey}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Réponse non valide de l\'API OpenWeatherMap');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    displayForecast(data); 
-
-                    const now = new Date();
-                    const tomorrow = new Date(now);
-                    tomorrow.setDate(now.getDate() + 1);
-                    const indexTomorrow = data.list.findIndex(forecast => {
-                        const forecastDate = new Date(forecast.dt_txt);
-                        return forecastDate.getDate() === tomorrow.getDate();
-                    });
-
-                    if (indexTomorrow !== -1) {
-                        const details = {
-                            temp: data.list[indexTomorrow].main.temp,
-                            description: data.list[indexTomorrow].weather[0].description
-                        };
-                        addToSearchHistory(cityName, details); 
-                    }
-                })
-                .catch(error => {
-                    console.error('Erreur lors de la récupération des données de prévision', error);
-                });
-        }
-
-        function displayForecast(data) {
-            var forecastContainer = document.getElementById('forecast-container');
-            forecastContainer.innerHTML = '';
-
-            var dailyForecasts = groupByDay(data.list);
-
-            var daysToShow = Object.keys(dailyForecasts).slice(1, 6);
-
-            var lavenderColors = ['#6A5ACD', '#7B68EE', '#8A2BE2', '#9370DB', '#AB83A1'];
-
-            daysToShow.forEach((day, index) => {
-                setTimeout(() => {
-                    var forecastElement = document.createElement('div');
-                    forecastElement.classList.add('day-forecast');
-
-                    var averageTemp = calculateAverageTemp(dailyForecasts[day]);
-
-                    var gradientColorStart = lavenderColors[index % lavenderColors.length];
-                    var gradientColorEnd = lavenderColors[(index + 1) % lavenderColors.length];
-                    forecastElement.style.background = `linear-gradient(to bottom, ${gradientColorStart}, ${gradientColorEnd})`;
-
-                    forecastElement.innerHTML = `
-                        <strong style="font-size: 1.2em;">${day}</strong>
-                        <div style="margin-top: 8px;">
-                            ${dailyForecasts[day][0].weather[0].description}, ${averageTemp} °C
-                        </div>
-                    `;
-                    forecastContainer.appendChild(forecastElement);
-
-                    forecastElement.style.opacity = 1;
-                }, index * 500); 
-            });
-        }
-
-        function groupByDay(forecasts) {
-            return forecasts.reduce((grouped, forecast) => {
-                var date = new Date(forecast.dt * 1000);
-                var day = date.toLocaleDateString('fr-FR', { weekday: 'long' });
-
-                if (!grouped[day]) {
-                    grouped[day] = [];
-                }
-
-                grouped[day].push(forecast);
-                return grouped;
-            }, {});
-        }
-
-        function calculateAverageTemp(forecasts) {
-            var totalTemp = forecasts.reduce((sum, forecast) => sum + forecast.main.temp, 0);
-            return (totalTemp / forecasts.length).toFixed(1);
-        }
-
-        function addToSearchHistory(cityName, weatherDetails) {
-            fetch(`${apiUrl}/weather/history`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ city: cityName, details: weatherDetails })
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erreur lors de l\'enregistrement de la ville et des détails météo dans l\'historique');
-                }
-                console.log('Ville et détails météo ajoutés à l\'historique');
-            })
-            .catch(error => {
-                console.error('Erreur lors de l\'enregistrement de la ville et des détails météo dans l\'historique', error);
-            });
-        }
-
         function redirectToNextPage() {
             window.location.href = "../authent/login.html";
         }
-
-        function displaySearchHistory() {
-            fetch(`${apiUrl}/weather/history`)
-                .then(response => response.json())
-                .then(history => {
-                    const historyContainer = document.getElementById('search-history');
-                    historyContainer.innerHTML = ''; // Effacez le contenu précédent
-
-                    history.forEach(entry => {
-                        const listItem = document.createElement('li');
-                        listItem.textContent = `Ville: ${entry.city}, Température: ${entry.details.temp}, Description: ${entry.details.description}`;
-                        historyContainer.appendChild(listItem);
-                    });
-                })
-                .catch(error => {
-                    console.error('Erreur lors de la récupération de l\'historique des recherches:', error);
-                });
-        }
-
-        // Appel de la fonction pour afficher l'historique des recherches au chargement de la page
-        displaySearchHistory();
     </script>
 </body>
 </html>
