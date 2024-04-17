@@ -18,7 +18,8 @@ function displaySearchHistory() {
                 const text = `
                     Ville: ${item.city}
                     Température: ${item.temperature}°C
-                    Description: ${item.description}
+                    Date : ${item.created_at}
+                    Utilisateur : ${item.userType}
                 `;
                 listItem.textContent = text;
                 searchHistory.appendChild(listItem);
@@ -29,17 +30,18 @@ function displaySearchHistory() {
         });
 }
 
+/* au cas où
 fetch(`${apiUrl}/weather/history`)
     .then(response => response.json())
     .then(data => {
         console.log("Données météorologiques reçues:", data);
         // Appel de la fonction avec les données météorologiques
         // Remplacez afficherResultat par la fonction que vous utilisez pour afficher les résultats
-        afficherResultat(data);
+       // afficherResultat(data);
     })
     .catch(error => {
         console.error('Erreur lors de la récupération des données météorologiques:', error);
     });
-
+*/
 // Appel de la fonction pour afficher l'historique lors du chargement de la page
 displaySearchHistory();
