@@ -3,23 +3,24 @@ body {
     padding: 0;
     background: linear-gradient(to right, #90CAF9, #266598);
     display: flex;
+    
+  
 }
+
 
 #body_div {
     font-family: 'Roboto', sans-serif;
     text-align: center;
     color: #fff;
     margin-top: 80px;
-    height: 400px;
-    width: max-content;
-    margin-left: auto;
-    margin-right: auto;
+    width: 70%; /* Max content is removed */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
-    z-index: 1;
+    z-index: 2;
+
 }
 
 #sol {
@@ -46,6 +47,17 @@ body {
     margin-top: 10px;
     position: relative; /* Ajoutez cette ligne pour ajuster le z-index du titre */
     z-index: 3; /* Ajoutez cette ligne pour définir le z-index du titre */
+}
+
+
+footer {
+    text-align: center;
+    padding: 7px;
+    background-color: cyan;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }
 
 #saisir_ville {
@@ -110,4 +122,32 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center; /* Centrer le logo horizontalement dans le conteneur */
+    align-items: center; /* Centrer le logo verticalement dans le conteneur */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    color: #333;
+}
+
+#logo_site {
+    width: 80px;
+    height: 60px;
+}
+
+.site-name {
+    font-size: 24px;
+    margin-left: 10px;
+    color: #333;
+}
+
+#body_div, #sol, #lune {
+    align-self: center; /* Assure que ces éléments sont centrés indépendamment dans le body */
 }

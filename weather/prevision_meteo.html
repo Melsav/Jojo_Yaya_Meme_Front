@@ -10,8 +10,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
+    <header>
+        <div class="logo-container">
+            <div class="logo">
+                <img id="logo_site" src="../authent/LOGOO-removebg-preview.png" alt="Logo SkyMétéo">
+                <h1 class="site-name">SkyMétéo</h1>
+            </div>
+        </div>
+    </header>
+
     <img id="sol" src="tonerre.png" alt="icone_sol">
     <img id="lune" src="lune.png" alt="icone_lune">
+
     <div id="body_div">
         <h1 id="titre">Prévisions Météo de la Semaine</h1>
 
@@ -21,6 +31,10 @@
         <button id="submit-button" onclick="getForecast()">Obtenir les prévisions</button>
 
         <div id="forecast-container" class="cadran"></div>
+        
+    <footer>
+        <p>&copy; 2024 SkyMétéo. Tous droits réservés.</p>
+    </footer>
 
         <script>
             const apiUrl = "http://192.168.1.36:3000";
