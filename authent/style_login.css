@@ -25,6 +25,7 @@ header {
     align-items: center;
     height: 74px;
     background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .nav_links {

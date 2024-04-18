@@ -3,42 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil</title>
-
+    <title>SkyMétéo - Votre Prévision Météo Fiable</title>
     <link rel="stylesheet" href="style_accueil.css">
 </head>
 <body>
     
     <header>
         <div class="logo">
-            <img id="logo_site" src="LOGOO-removebg-preview.png" alt="SkyMétéo">
-            <img id="back" src="background.jpg" alt="SkyyMétéo">
-           
+            <img id="logo_site" src="LOGOO-removebg-preview.png" alt="Logo SkyMétéo">
+            <h1 class="site-name">SkyMétéo</h1>
         </div>
         <nav>
             <ul class="nav_links">
-                <li><a href="#">Accueil</a></li>
+                <li><a href="../authent/accueil.html">Accueil</a></li>
                 <li><a href="../weather/prevision_meteo.html">Prévisions</a></li>
                 <li><a href="../spaces/home.html">Météo Spatiale</a></li>
-                <li><a href="../weather/map.html">Map</a></li>
+                <li><a href="../weather/map.html">Carte Météo</a></li>
             </ul>
         </nav>
         <div class="button-container">
             <a class="cta" href="register.html"><button>S'inscrire</button></a>
             <a class="cta" href="login.html"><button>Se connecter</button></a>
-            <a class="cta" href="#" id="btnConnexionAnonyme"><button>Connexion anonyme</button></a>
         </div>
     </header>
 
-
-    <div id="slogan-introduction">
-        <h2>Soyez prêt à explorer les cieux avec SkyMétéo</h2>
-        <p>Plongez dans un monde de météorologie céleste et spatiale. SkyMétéo vous offre des prévisions précises pour planifier vos aventures dans l'espace et observer les merveilles du ciel.</p>
+    <div id="slogan-introduction" class="content-container">
+        <div class="text-container">
+            <h2>Découvrez le ciel comme jamais auparavant avec SkyMétéo</h2>
+            <h2>Accédez à des prévisions détaillées pour planifier parfaitement vos journées et vos nuits étoilées.</h2>
+        </div>
     </div>
+
+    <div class="photo-archive">
+        <h3>Explorez notre galerie céleste</h3>
+        <div class="images-container">
+            <div class="image-slider">
+                <img src="espaceciel.jpeg" alt="Ciel Bleu">
+                <img src="orangeciel.jpeg" alt="Ciel Étoilé">
+                <img src="background.jpg" alt="Ciel Étoilé">
+                <img src="Soleilciel.jpeg" alt="Ciel Violet">
+                <img src="cielbleu.jpeg" alt="Ciel Bleu">
+                <img src="cieletoile.jpeg" alt="Ciel Étoilé">
+                <img src="cielviolet.jpeg" alt="Ciel Violet">
+            </div>
+        </div>
+        <button class="prev">Précédent</button>
+        <button class="next">Suivant</button>
+    </div>
+
     <footer>
-        <p>&copy; 2024 MétéoApp. Tous droits réservés.</p>
+        <p>&copy; 2024 SkyMétéo. Tous droits réservés.</p>
     </footer>
-    
+
     <script src="script_accueil.js"></script>
 </body>
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelector('.image-slider');
+    const totalSlides = slides.children.length;
+    const maxSlide = totalSlides - 3;  // Affiche 3 images à la fois
+    const widthOfImage = 300;  // Largeur d'une image, doit correspondre au CSS
+
+    document.querySelector('.prev').addEventListener('click', () => {
+        if (currentSlide > 0) {
+            currentSlide--;
+            updateSliderPosition();
+        }
+    });
+
+    document.querySelector('.next').addEventListener('click', () => {
+        if (currentSlide < maxSlide) {
+            currentSlide++;
+            updateSliderPosition();
+        }
+    });
+
+    function updateSliderPosition() {
+        slides.style.transform = `translateX(-${currentSlide * widthOfImage}px)`;
+    }
+</script>
+
+</html>
 </html>

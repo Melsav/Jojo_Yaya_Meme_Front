@@ -34,7 +34,7 @@
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ sessionID: sessionID, city: cityName, details: weatherDetails, userType: 'anonymous' }) // Enregistrement avec le type d'utilisateur "anonymous"
+                    body: JSON.stringify({ sessionID: sessionID, city: cityName, details: weatherDetails, userType }) // Enregistrement avec le type d'utilisateur "anonymous"
                 })
                 .then(response => {
                     if (!response.ok) {
