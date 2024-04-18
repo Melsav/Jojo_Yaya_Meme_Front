@@ -1,25 +1,144 @@
+
+/* Reset de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('background.jpg'); /* Remplacer 'background.jpg' par l'image de votre choix */
+    background-size: cover;
+    background-position: center;
+    background: linear-gradient(to bottom, #007FFF 0%, #00BFFF 100%);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 74px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.logo {
+    font-size: 24px;
+    color: #333;
+}
+
+nav {
+    display: flex;
+}
+
+.nav_links {
+    list-style: none;
+    display: flex;
+}
+
+.nav_links li {
+    padding: 0px 20px;
+}
+
+.nav_links li a {
+    transition: all 0.3s ease 0s;
+    color: #333;
+    margin: 15px;
+    text-decoration: none;
+}
+
+.nav_links li a:hover {
+    color: #017cff;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    gap: 28px; /* Espacement entre les boutons */
+}
+
+.cta button {
+    padding: 9px 25px;
+    background-color: rgba(1, 124, 255, 0.75);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.cta button:hover {
+    background-color: rgba(1, 124, 255, 1);
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: cyan;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+#logo_site {
+    width: 100px;
+    height: 80px;
+    margin-left: 15px;
+}
+
+#btn_home {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#btn_home:hover {
+    background-color: #555;
+}
+
 /* Style pour le conteneur de l'historique */
 .history-container {
-    width: 55px; /* Largeur du conteneur */
-    max-height: 40px; /* Hauteur maximale du conteneur */
-    margin: 0 auto; /* Centrage horizontal */
+    width: 1250px; /* Largeur du conteneur */
+    margin: 20px auto 0; /* Centrage horizontal et réduction de la marge supérieure */
     overflow-y: auto; /* Ajoute un défilement vertical lorsque nécessaire */
-    border: 1px solid #ccc; /* Bordure pour délimiter le cadre */
-    border-radius: 100px;
-    padding: 100px; /* Espacement intérieur */
-    background: linear-gradient(135deg, #8A2BE2, #6A5ACD);
-    margin-bottom: 10px;
+    border-radius: 5px; /* Ajout de la bordure arrondie */
+    padding: 20px; /* Réduction de l'espacement intérieur */
 }
 
 /* Style pour chaque élément de l'historique */
-/* Style pour chaque élément de l'historique */
-
-
-/* Style pour les éléments de l'historique alternant entre bleu clair et violet clair */
+/*Style pour les éléments de l'historique alternant entre bleu clair et violet clair */
 .history-item:nth-child(even) {
     background-color: #94c7e5; /* Bleu clair */
 }
 
 .history-item:nth-child(odd) {
     background-color: #9191c9; /* Violet clair */
+}
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+#logo_site {
+    width: 80px;
+    height: 60px;
+    margin-right: 10px; /* Ajout de marge entre le logo et le texte */
+}
+
+.site-name {
+    font-size: 24px;
+    color: #333;
+}
+
+/* Style pour le titre de l'historique */
+.history-title {
+    text-align: center; /* Centrage du titre */
+    font-size: 28px; /* Augmentation de la taille de la police */
+    margin-bottom: 20px; /* Ajout d'espace en bas du titre */
+    margin-top: 20px;
 }

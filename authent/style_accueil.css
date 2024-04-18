@@ -7,7 +7,6 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-image: url('background.jpg'); /* Remplacer 'background.jpg' par l'image de votre choix */
     background-size: cover;
     background-position: center;
     background: linear-gradient(to bottom, #007FFF 0%, #00BFFF 100%);
@@ -17,102 +16,72 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 74px;
+    height: 40px; /* Réduire la hauteur du header */
+    padding: 0 20px; /* Réduire les paddings horizontaux */
     background-color: rgba(255, 255, 255, 0.5);
 }
 
+#slogan-introduction {
+    padding: 20px;
+    text-align: center;
+    margin: 30px auto;
+    max-width: 80px;
+    border-radius: 80px;
+   /* background-image: url('authent/background.jpg');
+    background-size: cover;
+  /*  background-position: left;*/
+    /*background-color: rgba(255, 255, 255, 0.8); /* En arrière-plan de la couleur blanche */
+}
+
 .logo {
-    font-size: 24px;
+    font-size: 10px; /* Réduire la taille du logo */
     color: #333;
 }
 
+#logo_site {
+    width: 30px; /* Réduire la taille du logo */
+    height: 12px; /* Réduire la taille du logo */
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+
 .nav_links {
     list-style: none;
+    margin-right: 4px; /* Ajouter un peu d'espace à droite */
 }
 
 .nav_links li {
     display: inline-block;
-    padding: 0px 20px;
+    padding: 0px 5px; /* Réduire l'espacement entre les éléments */
 }
 
 .nav_links li a {
     transition: all 0.3s ease 0s;
     color: #333;
-    margin: 15px;
     text-decoration: none;
-}
-
-.nav_links li a:hover {
-    color: #017cff;
 }
 
 .button-container {
     display: flex;
     align-items: center;
-    gap: 28px; /* Espacement entre les boutons */
-}
-.cta_ button {
-
-    padding: 9px 25px;
-    background-color: rgba(1, 124, 255, 0.75);
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
 }
 
 .cta button {
-    padding: 9px 25px;
-    background-color: rgba(1, 124, 255, 0.75);
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
-    
+    padding: 9px 20px; /* Réduire la taille des boutons */
+    margin-left: 5px; /* Ajouter un peu d'espace entre les boutons */
 }
 
-
-.cta button:hover {
-    background-color: rgba(1, 124, 255, 1);
-}
-
-.signup-form {
-    background-color: rgba(255, 255, 255, 0.8);
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 30px;
-    border-radius: 8px;
-    margin-top: 30px;
-}
-
-.signup-form h2 {
-    color: #333;
-    margin-bottom: 20px;
-}
-
-.signup-form form {
-    display: flex;
-    flex-direction: column;
-}
-
-.signup-form input {
+#slogan-introduction h2 {
     margin-bottom: 10px;
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    font-size: 24px;
+    color: #333;
 }
 
-.signup-form button {
-    background-color: #017cff;
-    color: white;
-    padding: 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.signup-form button:hover {
-    background-color: #0056b3;
+#slogan-introduction p {
+    margin-top: 40px;
+    font-size: 16px;
+    color: #666;
 }
 
 footer {
@@ -124,32 +93,10 @@ footer {
     bottom: 0;
     width: 100%;
 }
+#back {
+    width: 30px; /* Réduire la taille du logo */
+    height: 12px; /* Réduire la taille du logo */
+    margin-top: 5px;
+    margin-right: 5px;
 
-#already_reg {
-
-    margin-top: 15px;
-    font-weight: bold;
-    text-decoration: none;
-
-}
-
-#create {
-    text-align: center;
-}
-
-
-
-#logo_site {
-
-    width: 100px;
-    height: 80px;
-    margin-left: 15px;
-
-
-}
-
-#message-container {
-
-        font-weight: bold;
-        text-align: center;
 }

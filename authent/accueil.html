@@ -10,15 +10,17 @@
 <body>
     
     <header>
-       
-        <img id="logo_site" src="LOGOO-removebg-preview.png"/>
+        <div class="logo">
+            <img id="logo_site" src="LOGOO-removebg-preview.png" alt="SkyMétéo">
+            <img id="back" src="background.jpg" alt="SkyyMétéo">
+           
+        </div>
         <nav>
             <ul class="nav_links">
                 <li><a href="#">Accueil</a></li>
                 <li><a href="../weather/prevision_meteo.html">Prévisions</a></li>
                 <li><a href="../spaces/home.html">Météo Spatiale</a></li>
                 <li><a href="../weather/map.html">Map</a></li>
-             
             </ul>
         </nav>
         <div class="button-container">
@@ -26,17 +28,17 @@
             <a class="cta" href="login.html"><button>Se connecter</button></a>
             <a class="cta" href="#" id="btnConnexionAnonyme"><button>Connexion anonyme</button></a>
         </div>
-        <div class="menu-toggle" id="mobile-menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
     </header>
-    <t1> SkyMétéo</t1>
+
+
+    <div id="slogan-introduction">
+        <h2>Soyez prêt à explorer les cieux avec SkyMétéo</h2>
+        <p>Plongez dans un monde de météorologie céleste et spatiale. SkyMétéo vous offre des prévisions précises pour planifier vos aventures dans l'espace et observer les merveilles du ciel.</p>
+    </div>
     <footer>
         <p>&copy; 2024 MétéoApp. Tous droits réservés.</p>
     </footer>
+    
     <script src="script_accueil.js"></script>
 </body>
 </html>
