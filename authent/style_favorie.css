@@ -1,0 +1,156 @@
+/* Reset de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-size: cover;
+    background-position: center;
+    background: linear-gradient(to bottom, #007FFF 0%, #00BFFF 100%);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 74px;
+    background-color: rgba(255, 255, 255, 0.5);
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    color: #333;
+    margin-top: 20px; 
+    margin-left: 20px; 
+}
+
+
+
+nav {
+    display: flex;
+}
+
+.nav_links {
+    list-style: none;
+    display: flex;
+}
+
+.nav_links li {
+    padding: 0px 20px;
+}
+
+.nav_links li a {
+    transition: all 0.3s ease 0s;
+    color: #333;
+    margin: 15px;
+    text-decoration: none;
+}
+
+.nav_links li a:hover {
+    color: #017cff;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    gap: 28px; /* Espacement entre les boutons */
+}
+
+.cta button {
+    padding: 9px 25px;
+    background-color: rgba(1, 124, 255, 0.75);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.cta button:hover {
+    background-color: rgba(1, 124, 255, 1);
+}
+
+
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: cyan;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+#logo_site {
+    width: 100px;
+    height: 80px;
+    margin-left: 15px;
+}
+
+/* Styles pour les listes des pays et des villes */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    padding: 10px 0;
+  /*  border-bottom: 1px solid #ccc; */
+    font-size: 18px;
+}
+
+ul li:last-child {
+    border-bottom: none;
+}
+
+main {
+    padding-top: 90px; /* Pour compenser la hauteur du header fixe */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+h2 {
+    margin-top: 0px;
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    padding: 10px 0;
+    font-size: 18px;
+}
+
+ul li:last-child {
+    border-bottom: none;
+}
+
+/* Cadre blanc pour les villes et les pays top 3 */
+.cadre-blanc {
+    background-color: #c5e6f0;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}

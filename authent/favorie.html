@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Historique des recherches</title>
-    <link rel="stylesheet" href="style_history.css">
+    <title>Découvrez les tendances météo</title>
+    <link rel="stylesheet" href="style_favorie.css">
     <link rel="icon" href="../authent/logoo-removebg-preview.png" type="image/png">
 </head>
 
 <body>
     <header>
         <img id="logo_site" src="../authent/LOGOO-removebg-preview.png" alt="Logo du site">
-        <h1 class="site-name">SkyMétéo</h1> 
+        <h2 class="site-name">SkyMétéo</h2> 
         <nav>
             <ul class="nav_links">
                 <li><a href="../authent/accueil.html">Accueil</a></li>
@@ -27,17 +27,29 @@
         </div>
     </header>
     <main>
-
-        <h2 class="history-title">Historique des Recherches Météo</h2>
-
-        <div id="search-history" class="history-container">
+        <h1>Les pays les plus consultées pour la météo sur skyMétéo! !</h1>
+        <ul id="most-clicked-countries" class ="cadre-blanc">
+            <li> le top 1</li>
+            <li> le top 2</li>
+            <li> le top 3</li>
+        </ul>
     
-        </div>
-        <script src="script_weather.js"></script>
+        <h1>Les villes les plus consultées pour la météo sur skyMétéo!</h1>
+        <ul id="most-clicked-cities" class = "cadre-blanc">
+            <li>le top 1</li>
+            <li>le top 2</li>
+            <li> le top 3</li>
+        </ul>
     </main>
+
+    <section id="user-favorites">
+        <h1>Mes favoris</h1>
+        <ul id="user-favorites-list"></ul>
+    </section>
+
     <footer>
         <p>&copy; 2024 MétéoApp. Tous droits réservés.</p>
     </footer>
+    <script src="script_favorie.js"></script>
 </body>
-
 </html>
