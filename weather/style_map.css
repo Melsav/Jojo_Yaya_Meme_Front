@@ -10,17 +10,31 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    overflow-x: hidden;
     position: relative; 
 }
-
-#map {
-    height: 70vh; 
-    width: 70vw; 
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+#logo_site {
+    max-height: 50px; 
 }
 
+.site-name {
+    font-size: 24px; }
+
+
+#map {
+    height: 400px; /* Ajustez la hauteur de la carte selon vos besoins */
+    width: 400px; /* Ajustez la largeur de la carte selon vos besoins */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-right: 20px;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap; /* Permet aux éléments de s'enrouler lorsqu'ils atteignent la fin de la ligne */
+    justify-content: center; /* Centre les éléments horizontalement */
+    align-items: flex-start; /* Aligne les éléments en haut de leur conteneur */
+}
 #weather-info {
     margin-top: 20px;
     padding: 20px;
@@ -39,9 +53,11 @@ body {
     margin-bottom: 5px; 
 }
 
+
 #weather-info strong:last-child {
     margin-bottom: 0;
 }
+
 
 .snowflake {
     position: absolute;
@@ -69,12 +85,12 @@ header {
     justify-content: space-between;
     align-items: center;
     height: 74px;
-    width: 100%; /* Assurez-vous que le header prend toute la largeur */
+    width: 100%;
     background-color: rgba(255, 255, 255, 0.5);
-    position: fixed; /* Fixe le header en haut */
-    top: 0; /* Aligner le haut du header avec le haut de la page */
-    left: 0; /* Aligner le côté gauche du header avec le côté gauche de la page */
-    z-index: 1000; /* S'assure que le header reste au-dessus des autres éléments */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
 nav {
@@ -104,9 +120,8 @@ nav {
 .button-container {
     display: flex;
     align-items: center;
-    gap: 28px; /* Espacement entre les boutons */
+    gap: 28px;
 }
-
 
 .cta button {
     padding: 9px 25px;
@@ -129,9 +144,5 @@ footer {
     left: 0;
     bottom: 0;
     width: 100%;
-}
-#logo_site {
-    width: 100px;
-    height: 80px;
-    margin-left: 15px;
+    z-index: 1; 
 }
