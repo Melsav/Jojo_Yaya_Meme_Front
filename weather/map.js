@@ -1,17 +1,22 @@
 var mymap = L.map('map').setView([0, 0], 2);
-var snowflakesContainer = document.createElement('div'); 
-snowflakesContainer.id = 'snowflakes-container';
-document.body.appendChild(snowflakesContainer); 
 
+// Ajout de la couche de carte
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
 }).addTo(mymap);
 
-mymap.on('click', function (e) {
-    var lat = e.latlng.lat;
-    var lon = e.latlng.lng;
+// Création du conteneur pour les flocons de neige
+var snowflakesContainer = document.createElement('div');
+snowflakesContainer.id = 'snowflakes-container';
+document.body.appendChild(snowflakesContainer);
 
-    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
+// Gestionnaire d'événement pour le clic sur la carte
+mymap.on('click', function (e) {
+    const lat = e.latlng.lat;
+    const lon = e.latlng.lng;
+    const nominatimUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
+
+    fetch(nominatimUrl)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Réponse non valide de l\'API Nominatim');
@@ -19,28 +24,44 @@ mymap.on('click', function (e) {
             return response.json();
         })
         .then(data => {
-            var locationName = data.address.city || data.address.country; // Choisissez la propriété appropriée
+            const locationName = data.address && data.address.city ? data.address.city :
+                                 (data.address.country || 'Localisation inconnue');
             getWeatherData(lat, lon, locationName);
         })
         .catch(error => {
-            console.error('Erreur lors de la récupération des informations de localisation', error);
+            console.error('Erreur lors de la récupération des informations de localisation:', error);
+            alert('Erreur lors de la récupération des informations de localisation. Voir la console pour les détails.');
         });
 });
 
 function getWeatherData(lat, lon, locationName) {
-    const apiKey = 'ae389c751139d10e6c783635a12a3b6e'; 
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Réponse non valide de l\'API OpenWeatherMap');
-            }
-            return response.json();
-        })
+    const apiKey = 'ae389c751139d10e6c783635a12a3b6e';
+    const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+
+    fetch(weatherUrl)
+        .then(response => response.json())
         .then(data => {
             displayWeatherInfo(data, locationName);
+            const postData = {
+                latitude: lat,
+                longitude: lon,
+                locationName: locationName,
+                weather: data.weather[0].description,
+                temperature: data.main.temp,
+                humidity: data.main.humidity,
+                windSpeed: data.wind.speed
+            };
+            return fetch('http://localhost:3000/weather/data_map', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(postData)
+            });
         })
+        .then(response => response.json())
+        .then(result => console.log('Data successfully sent to the server:', result))
         .catch(error => {
-            console.error('Erreur lors de la récupération des données météorologiques', error);
+            console.error('Error:', error);
+            alert('Failed to send weather data to server. See console for details.');
         });
 }
 
@@ -53,12 +74,10 @@ function displayWeatherInfo(data, locationName) {
         <strong>Humidité :</strong> ${data.main.humidity}%<br>
         <strong>Vitesse du vent :</strong> ${data.wind.speed} m/s
     `;
-
     weatherInfo.style.display = 'block';
 
-    // Vérifie si la température est inférieure à 10 degrés Celsius
     if (data.main.temp < 10) {
-        createSnowfall(); // Lance l'effet de neige
+        createSnowfall();
     }
 }
 
@@ -66,19 +85,13 @@ function createSnowfall() {
     for (let i = 0; i < 50; i++) {
         createSnowflake();
     }
-
-    // Arrête la chute de neige après 5 secondes
-    setTimeout(() => {
-        while (snowflakesContainer.firstChild) {
-            snowflakesContainer.removeChild(snowflakesContainer.firstChild);
-        }
-    }, 5000); // 5000 millisecondes = 5 secondes
+    setTimeout(() => snowflakesContainer.innerHTML = '', 5000);
 }
 
 function createSnowflake() {
     const snowflake = document.createElement('div');
     snowflake.className = 'snowflake';
     snowflake.style.left = `${Math.random() * window.innerWidth}px`;
-    snowflake.style.animationDuration = `${Math.random() * 2 + 1}s`; // Durée de l'animation entre 1s et 3s
+    snowflake.style.animationDuration = `${Math.random() * 2 + 1}s`;
     snowflakesContainer.appendChild(snowflake);
 }
