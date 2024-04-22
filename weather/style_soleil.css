@@ -1,10 +1,13 @@
+/* Réinitialisation de base pour le body et html pour une interface uniforme */
 body, html {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #eaeaea;
+    font-family: 'Arial', sans-serif; /* Utilisation de guillemets simples pour la cohérence */
+    background-color: #eaeaea; /* Couleur de fond légère pour réduire la fatigue oculaire */
+    overflow-x: hidden; /* Empêche le défilement horizontal */
 }
 
+/* Conteneur principal pour les widgets météo, centré et avec un espace entre eux */
 .weather-widgets {
     display: flex;
     justify-content: center;
@@ -13,19 +16,60 @@ body, html {
     padding: 20px;
 }
 
+/* Style individuel pour chaque widget */
 .widget {
     background-color: #ffffff;
     border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre douce pour un effet de profondeur */
     padding: 20px;
-    min-width: 200px;
+    min-width: 200px; /* Largeur minimum pour la cohérence */
     text-align: center;
 }
 
+/* Styles d'en-tête pour les widgets */
 .widget h2 {
-    margin: 0 0 10px 0;
+    margin: 0 0 10px 0; /* Espacement en dessous de l'en-tête */
 }
 
+/* Paragraphe dans les widgets pour une meilleure lisibilité */
 .widget p {
-    margin: 5px 0;
+    margin: 5px 0; /* Uniformise l'espacement vertical */
+}
+
+/* Styles pour la modale */
+.modal {
+    display: none; /* Caché par défaut */
+    position: fixed; /* Fixé sur toute la fenêtre */
+    z-index: 1000; /* S'assure que la modale est toujours au-dessus */
+    left: 0;
+    top: 0;
+    width: 100%; /* Largeur complète */
+    height: 100%; /* Hauteur complète */
+    overflow: auto; /* Permet le défilement si nécessaire */
+    background-color: rgba(0, 0, 0, 0.4); /* Fond noir transparent */
+}
+
+/* Contenu de la modale */
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; /* Centré et un peu plus haut sur la page */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%; /* Ajustez selon la taille de votre contenu */
+    border-radius: 10px; /* Bordures arrondies pour la douceur */
+}
+
+/* Bouton de fermeture personnalisé */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }

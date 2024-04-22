@@ -1,72 +1,142 @@
-body {
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(to right, #90CAF9, #266598);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyMétéo - Votre Prévision Météo Fiable</title>
+    <link rel="stylesheet" href="style_accueil2.css">
+    <link href='https://fullcalendar.io/releases/v5.10.1/lib/main.css' rel='stylesheet' />
+    <script src='https://fullcalendar.io/releases/v5.10.1/lib/main.js'></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img id="logo_site" src="LOGOO-removebg-preview.png" alt="Logo SkyMétéo">
+            <span class="site-name">SkyMétéo</span>
+        </div>
+        <nav>
+            <ul class="nav_links">
+                <li><a href="../authent/accueil2.html">Accueil</a></li>
+                <li><a href="../weather/prevision_meteo.html">Prévisions</a></li>
+                <li><a href="../spaces/home.html">Météo Spatiale</a></li>
+                <li><a href="../weather/map.html">Carte Météo</a></li>
+                <li><a href="../authent/favorie.html">Favorie</a></li>
+            </ul>
+        </nav>
+        <div class="button-container">
+            <a class="cta" href="register.html"><button>S'inscrire</button></a>
+            <a class="cta" href="login.html"><button>Se connecter</button></a>
+        </div>
+    </header>
+
+    <div class="calendar-container" id="calendar"></div>
+    <div class="filters">
+        <label for="date">Choisissez une date :</label>
+        <input type="date" id="date">
+    
+        <label for="country">Choisissez un pays :</label>
+        <select id="country"></select>
+        
+        <label for="city">Choisissez une ville :</label>
+        <select id="city"></select>
+    
+        <button id="filterBtn">Filtrer</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 SkyMétéo. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        const apiKey = "GfuMIcGVIbY6avmY0yNAaFTrZIZgeAPqCBnk0KZU";
+        document.addEventListener('DOMContentLoaded', function() {
+   const calendarEl = document.getElementById('calendar');
+   const calendar = new FullCalendar.Calendar(calendarEl, {
+       initialView: 'dayGridMonth',
+       events: fetchEvents,
+       eventClick: function(info) {
+           alert('Weather Alert: ' + info.event.title + '\nDescription: ' + info.event.extendedProps.description);
+       }
+   });
+   calendar.render();
+
+   const countrySelect = document.getElementById('country');
+   const citySelect = document.getElementById('city');
+
+   // Écouter les changements dans la liste déroulante des pays
+   countrySelect.addEventListener('change', function() {
+       const selectedCountry = countrySelect.value;
+       citySelect.innerHTML = '';
+
+       // Récupérer la liste des villes pour le pays sélectionné depuis votre serveur back-end
+       fetch(`/api/getCities?country=${selectedCountry}`)
+           .then(response => response.json())
+           .then(data => {
+               data.forEach(city => {
+                   const option = document.createElement('option');
+                   option.value = city;
+                   option.textContent = city;
+                   citySelect.appendChild(option);
+               });
+           })
+           .catch(error => {
+               console.error('Error fetching cities:', error);
+           });
+   });
+});
+
+function fetchEvents(fetchInfo, successCallback, failureCallback) {
+   const start = fetchInfo.start.toISOString();
+   const end = fetchInfo.end.toISOString();
+   const selectedCountry = document.getElementById('country').value;
+   const selectedCity = document.getElementById('city').value;
+
+   // Récupérer les données météorologiques filtrées depuis votre serveur back-end
+   fetch(`/api/getFilteredWeather?country=${selectedCountry}&city=${selectedCity}`)
+       .then(response => response.json())
+       .then(data => {
+           const events = [{
+               title: `Météo pour ${data.name}: ${data.weather[0].description}`,
+               start: new Date(), 
+               color: data.main.temp > 20 ? 'red' : 'blue' 
+           }];
+           successCallback(events);
+       })
+       .catch(error => {
+           console.error('Error fetching weather data:', error);
+           failureCallback(error);
+       });
 }
 
-header {
-    display: flex;
-    justify-content: flex-end; /* Logo à droite */
-    width: 100%;
-    padding: 10px 20px;
-}
+document.getElementById('filterBtn').addEventListener('click', function() {
+   calendar.refetchEvents();
+});
+   document.addEventListener('DOMContentLoaded', function() {
+       fetch('/getWeather')
+       .then(response => response.json())
+       .then(data => {
+           if (data) {
+               showWeatherPopup(data);
+           }
+       })
+       .catch(error => console.error('Error fetching weather:', error));
+   });
+   
+   function showWeatherPopup(weatherData) {
+       const popupContent = `
+           <strong>Météo pour ${weatherData.name}:</strong>
+           <p>Température: ${weatherData.main.temp} °C</p>
+           <p>Condition: ${weatherData.weather[0].description}</p>
+           <p>Humidité: ${weatherData.main.humidity}%</p>
+           <p>Vent: ${weatherData.wind.speed} km/h</p>
+       `;
+       alert(popupContent); // ou utilisez une modal personnalisée pour un meilleur style
+   }
 
-.logo {
-    display: flex;
-    align-items: center;
-    font-size: 24px;
-    color: #333;
-}
-
-#logo_site {
-    width: 80px;
-    height: 60px;
-}
-
-.site-name {
-    font-size: 24px;
-    margin-left: 10px;
-    color: #333;
-}
-
-#body_div {
-    font-family: 'Roboto', sans-serif;
-    text-align: center;
-    color: #fff;
-    margin-top: 80px;
-    width: 100%; /* Max content is removed */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    z-index: 1;
-}
-
-#city-input, #submit-button {
-    margin-top: 10px;
-    margin-bottom: 20px;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-#submit-button {
-    background-color: #1E90FF;
-    color: #fff;
-    cursor: pointer;
-}
-
-footer {
-    text-align: center;
-    padding: 10px;
-    background-color: cyan;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-}
+   document.getElementById('filterBtn').addEventListener('click', function() {
+   calendar.refetchEvents();
+});
+   </script>
+   
+</body>
+</html>

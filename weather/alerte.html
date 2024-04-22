@@ -3,55 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Widgets Météo Personnalisés</title>
+    <title>Alertes Météo</title>
     <link rel="stylesheet" href="style_soleil.css">
 </head>
 <body>
-    <div id="weather-widgets" class="weather-widgets">
-        <div class="widget" id="paris-weather"></div>
-        <div class="widget" id="new-york-weather"></div>
-        <div class="widget" id="tokyo-weather"></div>
+    <div id="weather-alerts" class="weather-alerts">
+        <!-- Les widgets météo seront injectés ici -->
     </div>
-    <h1>Bienvenue en france</h1>
+
     <script>
-        const apiKey = 'ae389c751139d10e6c783635a12a3b6e';
-const cities = [
-    { id: 'paris-weather', name: 'Paris' },
-    { id: 'new-york-weather', name: 'New York' },
-    { id: 'tokyo-weather', name: 'Tokyo' }
-];
+        document.addEventListener('DOMContentLoaded', function () {
+            initUserWidgets();
+        });
 
-async function fetchWeatherData(cityName) {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric&lang=fr`;
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Error fetching weather data:', error);
-    }
-}
+        async function fetchWeatherData(cityName) {
+            const apiKey = 'ae389c751139d10e6c783635a12a3b6e';  
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric&lang=fr`;
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error fetching weather data:', error);
+            }
+        }
 
-function updateWidget(cityId, weatherData) {
-    const widget = document.getElementById(cityId);
-    widget.innerHTML = `
-        <h2>Météo à ${weatherData.name}</h2>
-        <p>Température: ${weatherData.main.temp}°C</p>
-        <p>Condition: ${weatherData.weather[0].description}</p>
-        <p>Humidité: ${weatherData.main.humidity}%</p>
-        <p>Vent: ${weatherData.wind.speed} km/h</p>
-    `;
-}
+        function updateWidget(weatherData) {
+            const weatherAlertsContainer = document.getElementById("weather-alerts");
+            const widget = document.createElement('div');
+            widget.className = 'weather-widget';
+            widget.innerHTML = `
+                <h2>Météo à ${weatherData.name}</h2>
+                <p>Température: ${weatherData.main.temp}°C</p>
+                <p>Condition: ${weatherData.weather[0].description}</p>
+                <p>Humidité: ${weatherData.main.humidity}%</p>
+                <p>Vent: ${weatherData.wind.speed} km/h</p>
+            `;
+            weatherAlertsContainer.appendChild(widget);
+        }
 
-async function initWidgets() {
-    for (const city of cities) {
-        const weatherData = await fetchWeatherData(city.name);
-        updateWidget(city.id, weatherData);
-    }
-}
+        async function initUserWidgets() {
+            // Supposons que 'getFavorites' renvoie les villes favorites de l'utilisateur connecté
+            const response = await fetch('http://localhost:3000/getFavorites', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include' // Important pour les sessions
+            });
 
-initWidgets();
+            if (!response.ok) {
+                throw new Error('Failed to fetch favorite cities');
+            }
 
+            const cities = await response.json(); // Supposons que le serveur renvoie un tableau de noms de ville
+            for (const cityName of cities) {
+                const weatherData = await fetchWeatherData(cityName);
+                updateWidget(weatherData);
+            }
+        }
     </script>
 </body>
 </html>
