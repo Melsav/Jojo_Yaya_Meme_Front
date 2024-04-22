@@ -1,0 +1,145 @@
+/* style_previ.css */
+
+/* Reset des marges et des paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #90CAF9, #266598);
+    color: #333;
+}
+
+header {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(76,76,168,1) 19%, rgba(0,212,255,1) 57%, rgba(2,0,36,1) 99%);
+    padding: 20px;
+    text-align: center;
+    height: 90px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+#logo_site {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.site-name {
+    font-size: 1.5em;
+    color: white;
+}
+
+#lune {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+}
+
+#sol {
+    position: absolute;
+    top: 5px;
+    left: 20px;
+    width: 80px;
+    height: 80px;
+}
+
+#body_div {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: linear-gradient(to right, #b5d8ff, #84c0ff);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center; /* Centrer le contenu */
+}
+
+#titre {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: white;
+    margin-top: 40px;
+    text-align: center;
+}
+
+#saisir_ville {
+    display: block;
+    margin-bottom: 10px;
+    text-align: center; /* Centrer le texte */
+}
+
+#city-input {
+    width: calc(80% - 40px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#submit-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+#submit-button:hover {
+    background-color: #0056b3;
+}
+
+#forecast-container {
+    margin-top: 20px;
+    
+}
+
+.day-forecast {
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: white; /* Texte en blanc */
+        
+    
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#next_page {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#next_page:hover {
+    background-color: #0056b3;
+}
