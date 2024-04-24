@@ -1,8 +1,3 @@
-/*!
-FullCalendar Standard Bundle v6.1.11
-Docs & License: https://fullcalendar.io/docs/initialize-globals
-(c) 2023 Adam Shaw
-*/
 var FullCalendar = (function (exports) {
     'use strict';
 
@@ -21,8 +16,8 @@ var FullCalendar = (function (exports) {
         });
     }
     function ensureElHasStyles(el) {
-        if (el.isConnected && // sometimes true if SSR system simulates DOM
-            el.getRootNode // sometimes undefined if SSR system simulates DOM
+        if (el.isConnected && 
+            el.getRootNode 
         ) {
             registerStylesRoot(el.getRootNode());
         }
@@ -63,8 +58,8 @@ var FullCalendar = (function (exports) {
             }
         });
     }
-    // nonce
-    // -------------------------------------------------------------------------------------------------
+    
+    
     let queriedNonceValue;
     function getNonceValue() {
         if (queriedNonceValue === undefined) {
@@ -72,9 +67,7 @@ var FullCalendar = (function (exports) {
         }
         return queriedNonceValue;
     }
-    /*
-    TODO: discourage meta tag and instead put nonce attribute on placeholder <style> tag
-    */
+    
     function queryNonceValue() {
         const metaWithNonce = document.querySelector('meta[name="csp-nonce"]');
         if (metaWithNonce && metaWithNonce.hasAttribute('content')) {
@@ -86,8 +79,8 @@ var FullCalendar = (function (exports) {
         }
         return '';
     }
-    // main
-    // -------------------------------------------------------------------------------------------------
+    
+    
     if (typeof document !== 'undefined') {
         registerStylesRoot(document);
     }
@@ -111,7 +104,7 @@ var FullCalendar = (function (exports) {
                     this.tryDrain();
                 }
                 else {
-                    this.timeoutId = setTimeout(// NOT OPTIMAL! TODO: look at debounce
+                    this.timeoutId = setTimeout(
                     this.tryDrain.bind(this), delay);
                 }
             }
@@ -145,7 +138,7 @@ var FullCalendar = (function (exports) {
                 this.isRunning = true;
                 while (this.isDirty) {
                     this.isDirty = false;
-                    this.drained(); // might set isDirty to true again
+                    this.drained(); 
                 }
                 this.isRunning = false;
             }
@@ -173,13 +166,12 @@ var FullCalendar = (function (exports) {
             el.parentNode.removeChild(el);
         }
     }
-    // Querying
-    // ----------------------------------------------------------------------------------------------------------------
+    
+    
     function elementClosest(el, selector) {
         if (el.closest) {
             return el.closest(selector);
-            // really bad fallback for IE
-            // from https://developer.mozilla.org/en-US/docs/Web/API/Element/closest
+            
         }
         if (!document.documentElement.contains(el)) {
             return null;
@@ -196,9 +188,7 @@ var FullCalendar = (function (exports) {
         let method = el.matches || el.matchesSelector || el.msMatchesSelector;
         return method.call(el, selector);
     }
-    // accepts multiple subject els
-    // returns a real array. good for methods like forEach
-    // TODO: accept the document
+    
     function findElements(container, selector) {
         let containers = container instanceof HTMLElement ? [container] : container;
         let allMatches = [];
@@ -210,13 +200,12 @@ var FullCalendar = (function (exports) {
         }
         return allMatches;
     }
-    // accepts multiple subject els
-    // only queries direct child elements // TODO: rename to findDirectChildren!
+    
     function findDirectChildren(parent, selector) {
         let parents = parent instanceof HTMLElement ? [parent] : parent;
         let allMatches = [];
         for (let i = 0; i < parents.length; i += 1) {
-            let childNodes = parents[i].children; // only ever elements
+            let childNodes = parents[i].children; 
             for (let j = 0; j < childNodes.length; j += 1) {
                 let childNode = childNodes[j];
                 if (!selector || elementMatches(childNode, selector)) {
@@ -226,8 +215,7 @@ var FullCalendar = (function (exports) {
         }
         return allMatches;
     }
-    // Style
-    // ----------------------------------------------------------------------------------------------------------------
+    
     const PIXEL_PROP_RE = /(top|left|right|bottom|width|height)$/i;
     function applyStyle(el, props) {
         for (let propName in props) {
@@ -245,16 +233,12 @@ var FullCalendar = (function (exports) {
             el.style[name] = val;
         }
     }
-    // Event Handling
-    // ----------------------------------------------------------------------------------------------------------------
-    // if intercepting bubbled events at the document/window/body level,
-    // and want to see originating element (the 'target'), use this util instead
-    // of `ev.target` because it goes within web-component boundaries.
+    
     function getEventTargetViaRoot(ev) {
         var _a, _b;
         return (_b = (_a = ev.composedPath) === null || _a === void 0 ? void 0 : _a.call(ev)[0]) !== null && _b !== void 0 ? _b : ev.target;
     }
-    // Unique ID for DOM attribute
+    
     let guid$1 = 0;
     function getUniqueDomId() {
         guid$1 += 1;

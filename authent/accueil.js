@@ -1,7 +1,6 @@
-// Récupérer le bouton de connexion anonyme
 const btnConnexionAnonyme = document.getElementById('btnConnexionAnonyme');
 
-// Ajouter un écouteur d'événements au clic sur le bouton
+
 btnConnexionAnonyme.addEventListener('click', () => {
     /* Envoi d'une requête au backend pour enregistrer la connexion anonyme
     fetch('http://192.168.1.36:3000/login/anon', {
@@ -14,7 +13,7 @@ btnConnexionAnonyme.addEventListener('click', () => {
         if (!response.ok) {
             throw new Error('Erreur lors de la connexion anonyme');
         }
-        // Redirection de l'utilisateur vers la page des prévisions météorologiques
+        
         window.location.href = '../weather/prevision_meteo.html';
     })
     .catch(error => {

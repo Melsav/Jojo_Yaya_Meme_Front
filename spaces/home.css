@@ -17,7 +17,7 @@ aside {
     background: #333;
     color: #fff;
     padding: 20px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1); /* Ajoute une ombre pour une séparation visuelle */
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1); 
 }
 
 aside nav a {
@@ -33,13 +33,13 @@ aside nav a.active, aside nav a:hover {
 }
 
 main {
-    margin-left: 220px; /* Augmente légèrement pour créer un espace entre aside et main */
+    margin-left: 220px; 
     padding: 20px;
 }
 
 header {
     text-align: center;
-    margin-bottom: 20px; /* Ajoute de l'espace sous le header */
+    margin-bottom: 20px; 
 }
 
 header h1 {
@@ -61,7 +61,7 @@ header h1 {
 }
 
 .additional-margin {
-    margin-left: 20px; /* Ajoute une marge à gauche pour ces cartes spécifiques */
+    margin-left: 20px; 
     background: #fff;
     padding: 20px;
     border-radius: 8px;
@@ -98,15 +98,15 @@ canvas {
     aside {
         width: 100%;
         height: auto;
-        position: relative; /* Change pour adapter le layout sur les petits écrans */
+        position: relative; 
         box-shadow: none;
     }
 
     main {
-        margin-left: 0; /* Supprime le décalage sur les petits écrans */
+        margin-left: 0; 
     }
 
     .widget-grid {
-        grid-template-columns: 1fr; /* Adapte le grid pour les petits écrans */
+        grid-template-columns: 1fr; 
     }
 }

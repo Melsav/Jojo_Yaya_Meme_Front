@@ -22,8 +22,8 @@ body {
 
 
 #map {
-    height: 400px; /* Ajustez la hauteur de la carte selon vos besoins */
-    width: 400px; /* Ajustez la largeur de la carte selon vos besoins */
+    height: 400px; 
+    width: 400px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     margin-right: 20px;
@@ -31,9 +31,9 @@ body {
 
 main {
     display: flex;
-    flex-wrap: wrap; /* Permet aux éléments de s'enrouler lorsqu'ils atteignent la fin de la ligne */
-    justify-content: center; /* Centre les éléments horizontalement */
-    align-items: flex-start; /* Aligne les éléments en haut de leur conteneur */
+    flex-wrap: wrap; 
+    justify-content: center; 
+    align-items: flex-start; 
 }
 #weather-info {
     margin-top: 20px;

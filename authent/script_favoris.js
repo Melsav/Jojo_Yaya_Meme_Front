@@ -1,5 +1,5 @@
-const apiUrl = "http://localhost:3000"; // Remplacez par l'URL de votre backend
-// Fonction pour récupérer et afficher les pays les plus cliqués
+const apiUrl = "http://localhost:3000"; 
+
 function displayMostClickedCountries() {
     fetch(`${apiUrl}/weather/most_clicked_countries`)
         .then(response => {
@@ -22,7 +22,7 @@ function displayMostClickedCountries() {
         });
 }
 
-// Fonction pour récupérer et afficher les villes les plus cliquées
+
 function displayMostClickedCities() {
     fetch(`${apiUrl}/weather/most_clicked_cities`)
         .then(response => {
@@ -45,7 +45,7 @@ function displayMostClickedCities() {
         });
 }
 
-// Appel des fonctions pour afficher les pays et villes les plus cliqués
+
 displayMostClickedCountries();
 displayMostClickedCities();
 function displayUserFavorites() {
@@ -61,7 +61,7 @@ function displayUserFavorites() {
             userFavoritesList.innerHTML = '';
             data.forEach(favorite => {
                 const listItem = document.createElement('li');
-                listItem.textContent = favorite.name; // Supposons que le nom du favori soit stocké dans une propriété "name"
+                listItem.textContent = favorite.name; 
                 userFavoritesList.appendChild(listItem);
             });
         })
@@ -70,5 +70,5 @@ function displayUserFavorites() {
         });
 }
 
-// Appel de la fonction pour afficher les favoris de l'utilisateur
+
 displayUserFavorites();

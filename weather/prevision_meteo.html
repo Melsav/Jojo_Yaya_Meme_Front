@@ -40,15 +40,15 @@
             const apiUrl = "http://localhost:3000";
 
             function addToSearchHistory(cityName, weatherDetails) {
-                const sessionID = generateSessionID(); // Générer un identifiant de session unique
+                const sessionID = generateSessionID(); 
 
-                // Enregistrement dans la base de données avec l'identifiant de session
+                
                 fetch(`${apiUrl}/weather/history`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ sessionID: sessionID, city: cityName, details: weatherDetails, userType }) // Enregistrement avec le type d'utilisateur "anonymous"
+                    body: JSON.stringify({ sessionID: sessionID, city: cityName, details: weatherDetails, userType }) 
                 })
                 .then(response => {
                     if (!response.ok) {
@@ -61,9 +61,9 @@
                 });
             }
 
-            // Fonction pour générer un identifiant de session unique
+            
             function generateSessionID() {
-                // Générer un identifiant de session aléatoire (par exemple, à l'aide de bibliothèques comme uuid)
+                
                 return 'session_id_123';
             }
 

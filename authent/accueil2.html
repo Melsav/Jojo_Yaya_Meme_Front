@@ -52,7 +52,7 @@
 
     if (!document.querySelector('.weather-widget-script')) {
         const script = document.createElement('script');
-        script.className = 'weather-widget-script'; // Add a class to identify the script
+        script.className = 'weather-widget-script'; 
         script.async = true;
         script.charset = "utf-8";
         script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";
@@ -61,7 +61,7 @@
     }
 }
 
-// Setup widgets for specific cities with unique IDs
+
 document.addEventListener('DOMContentLoaded', () => {
     setupWeatherWidget(14, '2995468', 'openweathermap-widget-1'); // Marseille
     setupWeatherWidget(14, '2996943', 'openweathermap-widget-2'); // Lyon
@@ -70,9 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
     setupWeatherWidget(14, '2972315', 'openweathermap-widget-13'); // Toulouse
     setupWeatherWidget(14, '2990968', 'openweathermap-widget-14'); // Nantes
     setupWeatherWidget(14, '2988507', 'openweathermap-widget-5'); // Toulouse
-    setupWeatherWidget(14, '2972328', 'openweathermap-widget-15'); // jesaisplus je suis fatigué
-    setupWeatherWidget(14, '2998324', 'openweathermap-widget-16'); // jesaisplus je suis fatigué
-    setupWeatherWidget(14, '2994160', 'openweathermap-widget-6'); // jesaisplus je suis fatigué
+    setupWeatherWidget(14, '2972328', 'openweathermap-widget-15'); // reste a definir
+    setupWeatherWidget(14, '2998324', 'openweathermap-widget-16'); // reste a definir
+    setupWeatherWidget(14, '2994160', 'openweathermap-widget-6'); // reste a definir
     
     
     

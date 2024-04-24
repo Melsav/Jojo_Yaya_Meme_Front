@@ -15,7 +15,7 @@
                 <li><a href="../weather/prevision_meteo.html">Prévisions</a></li>
                 <li><a href="../spaces/home.html">Météo Spatiale</a></li>
                 <li><a href="../weather/map.html">Map</a></li>
-                <li><a href="../authent/favorie.html">Favorie</a></li>
+                <li><a href="favoris.html">Favoris</a></li>
             </ul>
         </nav>
         <div class="button-container">
@@ -50,9 +50,9 @@
         </section>
         <script>
 document.getElementById("signup-form").addEventListener("submit", function(event) {
-    event.preventDefault(); // Empêcher la soumission par défaut du formulaire
+    event.preventDefault(); 
 
-    // Récupérer les valeurs des champs du formulaire
+    
     const formData = {
         username: document.getElementById("username").value,
         email: document.getElementById("email").value,
@@ -62,13 +62,13 @@ document.getElementById("signup-form").addEventListener("submit", function(event
         confirmPassword: document.getElementById("confirmPassword").value
     };
 
-    // Vérifier si les mots de passe correspondent
+    
     if (formData.password !== formData.confirmPassword) {
         alert('Les mots de passe ne correspondent pas.');
         return;
     }
 
-    // Envoyer les données au serveur
+    
     fetch('http://localhost:3000/register', {
         method: 'POST',
         headers: {
@@ -79,17 +79,17 @@ document.getElementById("signup-form").addEventListener("submit", function(event
     .then(response => response.json())
     .then(data => {
         console.log('Success:', data);
-        // Afficher un message de succès
+        
         alert('Utilisateur inscrit avec succès.');
-        // Réinitialiser le formulaire
+        
         document.getElementById("signup-form").reset();
     })
     .catch((error) => {
         console.error('Error:', error);
-        // Afficher un message d'erreur
+        
         alert('Une erreur est survenue lors de l\'inscription.');
     });
-});/*
+});
             document.getElementById('signup-form').onsubmit = function(event) {
             event.preventDefault(); 
 
@@ -117,7 +117,7 @@ document.getElementById("signup-form").addEventListener("submit", function(event
    // const apiUrl = "http://192.168.1.36:3000";
     const apiUrl = "http://localhost:3000";
 
-    // Utiliser fetch pour envoyer les données au serveur
+    
     fetch(`${apiUrl}/register`, {
         method: 'POST',
         headers: {
@@ -128,9 +128,9 @@ document.getElementById("signup-form").addEventListener("submit", function(event
     .then(response => response.json())
     .then(data => {
         console.log('Success:', data);
-        // Afficher un message de succès dans le conteneur prévu à cet effet
+        
         messageContainer.innerHTML = '<p style="color: green;">Utilisateur inscrit avec succès.</p>';
-        form.reset(); // Réinitialiser les champs du formulaire
+        form.reset(); 
        
     })
     .catch((error) => {
@@ -138,7 +138,7 @@ document.getElementById("signup-form").addEventListener("submit", function(event
         messageContainer.innerHTML = '<p style="color: red;">Une erreur est survenue lors de l\'inscription.</p>';
     });
 };
-*/
+
 
 
 

@@ -1,6 +1,4 @@
 
-
-// Gestion du formulaire de feedback (assume existence of form and textarea)
 document.getElementById('feedback-form').addEventListener('submit', function(e) {
     e.preventDefault();
     const feedback = this.querySelector('textarea').value;

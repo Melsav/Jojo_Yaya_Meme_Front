@@ -1,4 +1,3 @@
-/* Réinitialisation et styles de base */
 * {
     margin: 0;
     padding: 0;
@@ -51,7 +50,7 @@ header {
 
 .nav_links li {
     display: inline-block;
-    padding: 0px 20px; /* Réduire l'espacement entre les éléments */
+    padding: 0px 20px; 
 }
 
 .nav_links a {
@@ -76,8 +75,8 @@ header {
     text-decoration: underline;
 }
 .cta button {
-    padding: 9px 20px; /* Réduire la taille des boutons */
-    margin-left: 5px; /* Ajouter un peu d'espace entre les boutons */
+    padding: 9px 20px; 
+    margin-left: 5px; 
     background-color: rgba(1, 124, 255, 0.75);
     border: none;
     border-radius: 50px;
@@ -106,10 +105,10 @@ footer {
 }
 
 .weather-widgets {
-    display: flex;          /* Use flexbox to align children */
+    display: flex;          
    justify-content: center;
-    flex-wrap: wrap;        /* Allows widgets to wrap onto the next line if needed */
-    padding: 20px;          /* Adds some spacing inside the container */
+    flex-wrap: wrap;        
+    padding: 20px;          
 }
 
 #btn{
@@ -121,8 +120,8 @@ footer {
 
 }
 .weather-widgets > div {
-    margin: 5px;            /* Space between widgets */
-    display: inline-block;  /* Inline block for individual widget alignment */
+    margin: 5px;            
+    display: inline-block;  
 }
 
 @media (max-width: 768px) {

@@ -15,7 +15,7 @@
                 <li><a href="../weather/prevision_meteo.html">Prévisions</a></li>
                 <li><a href="../spaces/home.html">Météo Spatiale</a></li>
                 <li><a href="../weather/map.html">Map</a></li>
-                <li><a href="#">Favorie</a></li>
+                <li><a href="favoris.html">Favoris</a></li>
             </ul>
         </nav>
         <div class="button-container">
@@ -71,18 +71,18 @@
         }
     })
     .then(data => {
-        // Affiche un message de succès et redirige l'utilisateur
+        
         const messageContainer = document.getElementById('message-container');
         messageContainer.textContent = 'Connexion réussie. Redirection...';
         messageContainer.style.color = 'green';
 
-        // Redirection vers la page prévision météo après 2 secondes
+        
         setTimeout(() => {
             window.location.href = '../weather/prevision_meteo.html';
         }, 1500);
     })
     .catch((error) => {
-        // Affiche un message d'erreur
+        
         const messageContainer = document.getElementById('message-container');
         messageContainer.textContent = error.message;
         messageContainer.style.color = 'red';

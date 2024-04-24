@@ -51,7 +51,7 @@ header {
 .button-container {
     display: flex;
     align-items: center;
-    gap: 28px; /* Espacement entre les boutons */
+    gap: 28px; 
 }
 
 .cta_ button {
@@ -117,21 +117,21 @@ header {
 }
 
 main {
-    flex: 1; /* Cela permet à l'élément main de se développer et d'occuper l'espace disponible */
-    padding-bottom: 60px; /* Ajustez cette valeur pour correspondre à la hauteur de votre footer si elle est fixe */
+    flex: 1; 
+    padding-bottom: 60px; 
 }
 
 footer {
     text-align: center;
-    padding: 30px 0; /* Vertical padding set explicitly */
+    padding: 30px 0; 
     background-color: cyan;
-    position: relative; /* Ou 'fixed', si le footer doit rester visible à tout moment */
+    position: relative; 
     left: 0;
     justify-content: center;
     align-items: center;
     bottom: 0;
     width: 100%;
-    min-height: 80px; /* Hauteur minimale du footer pour augmenter sa taille */
+    min-height: 80px; 
 }
 
 #not_reg {

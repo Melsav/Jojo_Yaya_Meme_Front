@@ -11,7 +11,7 @@ header {
     color: #61dafb;
     padding: 20px 0;
     text-align: center;
-    position: relative; /* Ajouté pour le positionnement absolu du bouton */
+    position: relative; 
 }
 
 h1 {
@@ -69,7 +69,7 @@ section#news h2 {
     text-decoration: underline;
 }
 
-/* Style pour le bouton de retour au dashboard */
+
 #dashboardBtn {
     position: absolute;
     top: 20px;

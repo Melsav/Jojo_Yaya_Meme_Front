@@ -1,16 +1,16 @@
 var mymap = L.map('map').setView([0, 0], 2);
 
-// Ajout de la couche de carte
+
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenStreetMap contributors'
 }).addTo(mymap);
 
-// Création du conteneur pour les flocons de neige
+
 var snowflakesContainer = document.createElement('div');
 snowflakesContainer.id = 'snowflakes-container';
 document.body.appendChild(snowflakesContainer);
 
-// Gestionnaire d'événement pour le clic sur la carte
+
 mymap.on('click', function (e) {
     const lat = e.latlng.lat;
     const lon = e.latlng.lng;

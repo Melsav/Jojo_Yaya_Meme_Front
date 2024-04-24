@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Distances des planètes par rapport au Soleil</title>
-    <!-- Charger Plotly depuis CDN -->
+    
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
         body {
@@ -19,10 +19,10 @@
             height: 100vh;
         }
         #plot {
-            width: 700px; /* Augmentation de la largeur */
-            height: 500px; /* Augmentation de la hauteur */
-            background-color: rgba(255, 255, 255, 0.9); /* Couleur de fond du graphique */
-            border-radius: 20px; /* Arrondi des angles */
+            width: 700px; 
+            height: 500px; 
+            background-color: rgba(255, 255, 255, 0.9); 
+            border-radius: 20px; 
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .modal {
@@ -71,7 +71,7 @@
     </div>
 
     <script>
-        // Données sur les distances des planètes par rapport au Soleil
+        
         const planet_distances = {
             'Mercure': { distance: 57.91, color: 'rgb(255, 0, 0)', info: 'Mercure est la planète la plus proche du Soleil.' },
             'Vénus': { distance: 108.21, color: 'rgb(0, 255, 0)', info: 'Vénus est la deuxième planète du système solaire, et est souvent appelée la jumelle de la Terre.' },
@@ -83,12 +83,12 @@
             'Neptune': { distance: 4495.06, color: 'rgb(128, 0, 0)', info: 'Neptune est la huitième et dernière planète du système solaire, et est principalement composée de gaz et de glace.' }
         };
 
-        // Création des données pour le graphique
+        
         const planets = Object.keys(planet_distances);
         const distances = Object.values(planet_distances).map(planet => planet.distance);
         const colors = Object.values(planet_distances).map(planet => planet.color);
 
-        // Création du graphique interactif avec Plotly
+        
         const trace = {
             x: planets,
             y: distances,
@@ -121,7 +121,7 @@
         const plotData = [trace];
         Plotly.newPlot('plot', plotData, layout);
 
-        // Afficher les informations de la planète lorsque le point est cliqué
+        
         document.getElementById('plot').on('plotly_click', function(data){
             const planet = data.points[0].x;
             const info = planet_distances[planet].info;
@@ -129,12 +129,12 @@
             document.getElementById('myModal').style.display = 'block';
         });
 
-        // Fermer le modal lorsqu'on clique sur la croix
+        
         document.getElementsByClassName('close')[0].onclick = function() {
             document.getElementById('myModal').style.display = 'none';
         };
 
-        // Fermer le modal lorsqu'on clique en dehors de la fenêtre modale
+        
         window.onclick = function(event) {
             if (event.target == document.getElementById('myModal')) {
                 document.getElementById('myModal').style.display = 'none';

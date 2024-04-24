@@ -62,24 +62,24 @@ input[type="date"] {
     color: #555;
 }
 
-/* Media Queries */
+
 @media (max-width: 600px) {
     #apodImage img {
-        max-width: 80%; /* Plus grande pour les petits écrans */
+        max-width: 80%; 
     }
 
     button, input[type="date"] {
-        width: 100%; /* Utilise toute la largeur disponible */
-        margin-top: 10px; /* Ajoute un peu d'espace au-dessus pour la lisibilité */
+        width: 100%; 
+        margin-top: 10px; 
     }
 
     body {
-        padding: 10px; /* Réduit le padding pour maximiser l'espace */
+        padding: 10px; 
     }
 }
 
 @media (min-width: 601px) and (max-width: 1024px) {
     #apodImage img {
-        max-width: 60%; /* Taille intermédiaire pour les tablettes */
+        max-width: 60%; 
     }
 }

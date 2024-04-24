@@ -1,6 +1,3 @@
-/* style_previ.css */
-
-/* Reset des marges et des paddings */
 * {
     margin: 0;
     padding: 0;
@@ -67,7 +64,7 @@ header {
     background: linear-gradient(to right, #b5d8ff, #84c0ff);
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center; /* Centrer le contenu */
+    text-align: center; 
 }
 
 #titre {
@@ -81,7 +78,7 @@ header {
 #saisir_ville {
     display: block;
     margin-bottom: 10px;
-    text-align: center; /* Centrer le texte */
+    text-align: center; 
 }
 
 #city-input {
@@ -115,7 +112,7 @@ header {
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
-    color: white; /* Texte en blanc */
+    color: white; 
         
     
 }

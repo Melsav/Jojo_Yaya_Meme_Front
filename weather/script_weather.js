@@ -1,7 +1,7 @@
-//const apiUrl = "http://192.168.1.36:3000"; // Remplacez par l'URL de votre backend
+
  const apiUrl = "http://localhost:3000";
 function displaySearchHistory() {
-    fetch(`${apiUrl}/weather/history`) // Endpoint backend pour l'historique des recherches
+    fetch(`${apiUrl}/weather/history`) 
         .then(response => {
             if (!response.ok) {
                 throw new Error('Réponse non valide du backend');
@@ -30,18 +30,5 @@ function displaySearchHistory() {
         });
 }
 
-/*
-fetch(`${apiUrl}/weather/history`)
-    .then(response => response.json())
-    .then(data => {
-        console.log("Données météorologiques reçues:", data);
-        // Appel de la fonction avec les données météorologiques
-        // Remplacez afficherResultat par la fonction que vous utilisez pour afficher les résultats
-       // afficherResultat(data);
-    })
-    .catch(error => {
-        console.error('Erreur lors de la récupération des données météorologiques:', error);
-    });
-*/
-// Appel de la fonction pour afficher l'historique lors du chargement de la page
+
 displaySearchHistory();
