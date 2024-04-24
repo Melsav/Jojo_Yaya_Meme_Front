@@ -34,17 +34,62 @@
             <div id="message-container"></div>
 
             <h2 id="create">Créez votre compte</h2>
-            <form id="signup-form">
-                <input type="text" name="username" placeholder="Nom" required>
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="password" name="password" placeholder="Mot de passe" required>
-                <input type="password" name="confirmPassword" placeholder="Confirmez le mot de passe" required>
+            
+            
+            <form id="signup-form" method="POST">
+                <input type="text" id="username" name="username" placeholder="Nom" required>
+                <input type="email" id="email" name="email" placeholder="Email" required>
+                <input type="password" id="password" name="password" placeholder="Mot de passe" required>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmez le mot de passe" required>
+                <input type="text" id="city" name="city" placeholder="Ville" required>
+                <input type="text" id="country" name="country" placeholder="Pays" required>
                 <button type="submit">Créer mon compte</button>
             </form>
-            
+            </form>
             <p id="already_reg">Déjà inscrit? <a id="already_reg" href="login.html">Se connecter</a></p>
         </section>
         <script>
+document.getElementById("signup-form").addEventListener("submit", function(event) {
+    event.preventDefault(); // Empêcher la soumission par défaut du formulaire
+
+    // Récupérer les valeurs des champs du formulaire
+    const formData = {
+        username: document.getElementById("username").value,
+        email: document.getElementById("email").value,
+        city: document.getElementById("city").value,
+        country: document.getElementById("country").value,
+        password: document.getElementById("password").value,
+        confirmPassword: document.getElementById("confirmPassword").value
+    };
+
+    // Vérifier si les mots de passe correspondent
+    if (formData.password !== formData.confirmPassword) {
+        alert('Les mots de passe ne correspondent pas.');
+        return;
+    }
+
+    // Envoyer les données au serveur
+    fetch('http://localhost:3000/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        // Afficher un message de succès
+        alert('Utilisateur inscrit avec succès.');
+        // Réinitialiser le formulaire
+        document.getElementById("signup-form").reset();
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        // Afficher un message d'erreur
+        alert('Une erreur est survenue lors de l\'inscription.');
+    });
+});/*
             document.getElementById('signup-form').onsubmit = function(event) {
             event.preventDefault(); 
 
@@ -86,15 +131,14 @@
         // Afficher un message de succès dans le conteneur prévu à cet effet
         messageContainer.innerHTML = '<p style="color: green;">Utilisateur inscrit avec succès.</p>';
         form.reset(); // Réinitialiser les champs du formulaire
-        window.location.href = "login.html";
-        
+       
     })
     .catch((error) => {
         console.error('Error:', error);
         messageContainer.innerHTML = '<p style="color: red;">Une erreur est survenue lors de l\'inscription.</p>';
     });
 };
-
+*/
 
 
 

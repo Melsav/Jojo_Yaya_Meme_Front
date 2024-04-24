@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkyMétéo - Votre Prévision Météo Fiable</title>
     <link rel="stylesheet" href="style_accueil2.css">
-    <script src='index.global.js'></script>
-
-
 </head>
 <body>
     <header>
@@ -17,11 +14,11 @@
         </div>
         <nav>
             <ul class="nav_links">
-                <li><a href="../authent/accueil2.html">Accueil</a></li>
-                <li><a href="../weather/prevision_meteo.html">Prévisions</a></li>
-                <li><a href="../spaces/home.html">Météo Spatiale</a></li>
-                <li><a href="../weather/map.html">Carte Météo</a></li>
-                <li><a href="../authent/favorie.html">Favorie</a></li>
+                <li><a href="accueil2.html">Accueil</a></li>
+                <li><a href="prevision_meteo.html">Prévisions</a></li>
+                <li><a href="home.html">Météo Spatiale</a></li>
+                <li><a href="map.html">Carte Météo</a></li>
+                <li><a href="favorie.html">Favoris</a></li>
             </ul>
         </nav>
         <div class="button-container">
@@ -29,117 +26,68 @@
             <a class="cta" href="login.html"><button>Se connecter</button></a>
         </div>
     </header>
+    <div class="weather-widgets">
+    <div id="openweathermap-widget-1"></div>
+    <div id="openweathermap-widget-2"></div>
+    <div id="openweathermap-widget-3"></div>
+    <div id="openweathermap-widget-4"></div>
+    <div id="openweathermap-widget-5"></div>
+    <div id="openweathermap-widget-13"></div>
+    <div id="openweathermap-widget-14"></div>
+    <div id="openweathermap-widget-15"></div>
+    <div id="openweathermap-widget-16"></div>
+    <div id="openweathermap-widget-6"></div>
+</div>
+<script>function setupWeatherWidget(id, cityId, containerId) {
+    window.myWidgetParam = window.myWidgetParam || [];
+    window.myWidgetParam.push({
+        id: id,
+        cityid: cityId,
+        appid: '59ed57b0e3ce0bc0b9ebc3cfe7558c94',
+        units: 'metric',
+        containerid: containerId,
+       
+    });
 
-    <div class="calendar-container" id="calendar"></div>
-    <div class="filters">
-        <label for="date">Choisissez une date :</label>
-        <input type="date" id="date">
+
+    if (!document.querySelector('.weather-widget-script')) {
+        const script = document.createElement('script');
+        script.className = 'weather-widget-script'; // Add a class to identify the script
+        script.async = true;
+        script.charset = "utf-8";
+        script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";
+        document.head.appendChild(script);
+        console.log("nee");
+    }
+}
+
+// Setup widgets for specific cities with unique IDs
+document.addEventListener('DOMContentLoaded', () => {
+    setupWeatherWidget(14, '2995468', 'openweathermap-widget-1'); // Marseille
+    setupWeatherWidget(14, '2996943', 'openweathermap-widget-2'); // Lyon
+    setupWeatherWidget(14, '2990439', 'openweathermap-widget-3'); // Nice
+    setupWeatherWidget(14, '3031582', 'openweathermap-widget-4'); // Bordeaux
+    setupWeatherWidget(14, '2972315', 'openweathermap-widget-13'); // Toulouse
+    setupWeatherWidget(14, '2990968', 'openweathermap-widget-14'); // Nantes
+    setupWeatherWidget(14, '2988507', 'openweathermap-widget-5'); // Toulouse
+    setupWeatherWidget(14, '2972328', 'openweathermap-widget-15'); // jesaisplus je suis fatigué
+    setupWeatherWidget(14, '2998324', 'openweathermap-widget-16'); // jesaisplus je suis fatigué
+    setupWeatherWidget(14, '2994160', 'openweathermap-widget-6'); // jesaisplus je suis fatigué
     
-        <label for="country">Choisissez un pays :</label>
-        <select id="country"></select>
-        
-        <label for="city">Choisissez une ville :</label>
-        <select id="city"></select>
     
-        <button id="filterBtn">Filtrer</button>
+    
+});
+</script>
+   
+    <div class="feedback-section">
+        <h2>Envoyez-nous vos commentaires</h2>
+        <form id="feedback-form">
+            <textarea required></textarea>
+            <button id="btn" type="submit">Envoyer</button>
+        </form>
     </div>
-
     <footer>
         <p>&copy; 2024 SkyMétéo. Tous droits réservés.</p>
     </footer>
-
-
-    <script>
-
-
-        const apiUrl = "http://localhost:3000";
-        const apiKey = "GfuMIcGVIbY6avmY0yNAaFTrZIZgeAPqCBnk0KZU";
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            const calendarEl = document.getElementById('calendar');
-            const calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                events: fetchEvents,
-                eventClick: function(info) {
-                    alert('Weather Alert: ' + info.event.title + '\nDescription: ' + info.event.extendedProps.description);
-                }
-            });
-            calendar.render();
-    
-            const countrySelect = document.getElementById('country');
-            const citySelect = document.getElementById('city');
-    
-            // Écouter les changements dans la liste déroulante des pays
-            countrySelect.addEventListener('change', function() {
-                const selectedCountry = countrySelect.value;
-                citySelect.innerHTML = '';
-    
-                // Récupérer la liste des villes pour le pays sélectionné depuis votre serveur back-end
-                fetch(`${apiUrl}/api/getCities?country=${selectedCountry}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        data.forEach(city => {
-                            const option = document.createElement('option');
-                            option.value = city;
-                            option.textContent = city;
-                            citySelect.appendChild(option);
-                        });
-                    })
-                    .catch(error => {
-                        console.error('Error fetching cities:', error);
-                    });
-            });
-        });
-    
-        function fetchEvents(fetchInfo, successCallback, failureCallback) {
-            const start = fetchInfo.start.toISOString();
-            const end = fetchInfo.end.toISOString();
-            const selectedCountry = document.getElementById('country').value;
-            const selectedCity = document.getElementById('city').value;
-    
-            // Récupérer les données météorologiques filtrées depuis votre serveur back-end
-            fetch(`${apiUrl}/api/getFilteredWeather?country=${selectedCountry}&city=${selectedCity}`)
-                .then(response => response.json())
-                .then(data => {
-                    const events = [{
-                        title: `Météo pour ${data.name}: ${data.weather[0].description}`,
-                        start: new Date(),
-                        color: data.main.temp > 20 ? 'red' : 'blue'
-                    }];
-                    successCallback(events);
-                })
-                .catch(error => {
-                    console.error('Error fetching weather data:', error);
-                    failureCallback(error);
-                });
-        }
-    
-        document.getElementById('filterBtn').addEventListener('click', function() {
-            calendar.refetchEvents();
-        });
-    
-        document.addEventListener('DOMContentLoaded', function() {
-            fetch(`${apiUrl}/getWeather`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data) {
-                        showWeatherPopup(data);
-                    }
-                })
-                .catch(error => console.error('Error fetching weather:', error));
-        });
-    
-        function showWeatherPopup(weatherData) {
-            const popupContent = `
-                <strong>Météo pour ${weatherData.name}:</strong>
-                <p>Température: ${weatherData.main.temp} °C</p>
-                <p>Condition: ${weatherData.weather[0].description}</p>
-                <p>Humidité: ${weatherData.main.humidity}%</p>
-                <p>Vent: ${weatherData.wind.speed} km/h</p>
-            `;
-            alert(popupContent); // ou utilisez une modal personnalisée pour un meilleur style
-        }
-    
-    </script>
 </body>
 </html>
