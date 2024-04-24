@@ -16,19 +16,30 @@ body {
 
 header {
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.9); 
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 20px; 
 }
 
 .logo {
     display: flex;
     align-items: center;
-    font-size: 24px;
-    color: #333;
+}
+
+.nav_links li {
+    padding: 0px 40px; 
+    margin-right: 20px;
+}
+
+.logo, .nav_links, .button-container {
+    margin-right: 45px; 
+}
+
+.button-container {
+    margin-left: auto; 
 }
 
 #logo_site {
@@ -40,7 +51,6 @@ header {
 .site-name {
     font-size: 24px;
     margin-left: 10px;
-    color: #333;
 }
 
 .nav_links {
@@ -49,94 +59,72 @@ header {
 }
 
 .nav_links li {
-    display: inline-block;
-    padding: 0px 20px; 
+    padding: 0px 15px; 
 }
 
 .nav_links a {
-    transition: all 0.3s ease 0s;
+    transition: color 0.3s ease; 
     color: #333;
-    margin: 15px;
     text-decoration: none;
 }
 
 .nav_links a:hover {
     color: #017cff;
-    text-decoration: underline;
 }
 
 .button-container {
     display: flex;
     align-items: center;
-    gap: 28px; 
+    gap: 20px; 
 }
-.nav_links li a:hover, .cta button:hover {
-    color: #017cff;
-    text-decoration: underline;
-}
+
 .cta button {
-    padding: 9px 20px; 
-    margin-left: 5px; 
-    background-color: rgba(1, 124, 255, 0.75);
+    padding: 10px 25px; 
+    background-color: #017cff; 
     border: none;
-    border-radius: 50px;
+    border-radius: 30px; 
+    color: #fff; 
     cursor: pointer;
-    transition: all 0.3s ease 0s;
+    transition: background-color 0.3s ease; 
+}
+
+.cta button:hover {
+    background-color: #0159a5; 
+}
+
+.feedback-section {
+    margin-top: 40px; 
+    text-align: center;
+}
+
+.feedback-section h2 {
+    margin-bottom: 20px; 
+}
+
+.feedback-section textarea {
+    width: 100%; 
+    padding: 10px; 
+    margin-bottom: 10px; 
+}
+
+#btn {
+    background-color: #017cff; 
+    border: none;
+    border-radius: 30px; 
+    padding: 10px 25px; 
+    color: #fff; 
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+}
+
+#btn:hover {
+    background-color: #0159a5; 
 }
 
 footer {
     text-align: center;
     padding: 20px;
-    background-color: cyan;
+    background-color: rgba(255, 255, 255, 0.9); 
     width: 100%;
     margin-top: auto;
-}
-
-
-
-.contact-form {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.contact-form form {
-    margin: auto;
-    max-width: 300px;
-}
-
-.weather-widgets {
-    display: flex;          
-   justify-content: center;
-    flex-wrap: wrap;        
-    padding: 20px;          
-}
-
-#btn{
-    background-color: rgba(1, 124, 255, 0.75);
-    border: none;
-    border-radius: 80px;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
-
-}
-.weather-widgets > div {
-    margin: 5px;            
-    display: inline-block;  
-}
-
-@media (max-width: 768px) {
-    .nav_links, .button-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .weather-widgets, .contact-form {
-        flex-direction: column;
-        align-items: center;
-    }
-
-
-    .button-container {
-        flex-direction: column;
-    }
 }

@@ -61,7 +61,7 @@ function getWeatherData(lat, lon, locationName) {
         .then(result => console.log('Data successfully sent to the server:', result))
         .catch(error => {
             console.error('Error:', error);
-            alert('Failed to send weather data to server. See console for details.');
+            
         });
 }
 
