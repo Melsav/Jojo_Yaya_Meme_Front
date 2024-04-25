@@ -4,7 +4,6 @@
         <meta charset="UTF-8">
         <title>Graphiques Météo avec OpenWeather API</title>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <!-- Inclure l'adaptateur de date pour Chart.js -->
         <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
         <link rel="stylesheet" href="style_fluct.css">
     </head>
@@ -22,18 +21,19 @@
     <form id="city-form">
         <input type="text" id="city-input" placeholder="Entrez le nom d'une ville" required>
         <button type="submit">Voir la météo</button>
-        <a href="index.html" class="button-style">Accueil</a>
+        <a href="../authent/accueil.html" class="button-style">Accueil</a>
+        <a href="../weather/climatique.html" class="button-style-clim">Changement Climatique</a>
     </form>
 </div>
 
 <script>
-const apiKey = 'ae389c751139d10e6c783635a12a3b6e'; // Remplacez par votre clé API OpenWeather
-// Variables globales pour stocker les instances des graphiques
+const apiKey = 'ae389c751139d10e6c783635a12a3b6e'; 
+
 let tempChartInstance = null;
 let rainChartInstance = null;
 
 document.getElementById('city-form').addEventListener('submit', function(e) {
-    e.preventDefault(); // Empêche le rechargement de la page lors de la soumission du formulaire
+    e.preventDefault(); 
     const city = document.getElementById('city-input').value.trim();
     if (city) {
         fetchWeatherDataAndInitializeCharts(city);
@@ -57,7 +57,7 @@ function fetchWeatherDataAndInitializeCharts(city) {
             const temps = data.list.map(item => item.main.temp);
             const rain = data.list.map(item => item.rain && item.rain['3h'] ? item.rain['3h'] : 0);
 
-            // Appel à initializeChart pour chaque type de données
+            
             initializeChart('tempChart', 'Température (°C)', labels, temps, 'line', 'rgb(75, 192, 192)', tempChartInstance);
             initializeChart('rainChart', 'Précipitations (mm)', labels, rain, 'bar', 'rgb(54, 162, 235)', rainChartInstance);
         })
@@ -69,11 +69,11 @@ function fetchWeatherDataAndInitializeCharts(city) {
 
 function initializeChart(chartId, label, labels, data, type, borderColor, chartInstance) {
     const ctx = document.getElementById(chartId).getContext('2d');
-    // Détruire l'instance existante si elle existe
+    
     if (chartInstance) {
         chartInstance.destroy();
     }
-    // Création d'une nouvelle instance de graphique
+    
     chartInstance = new Chart(ctx, {
         type: type,
         data: {
@@ -105,7 +105,7 @@ function initializeChart(chartId, label, labels, data, type, borderColor, chartI
             }
         }
     });
-    // Mettre à jour la variable globale avec la nouvelle instance
+   
     if (chartId === 'tempChart') {
         tempChartInstance = chartInstance;
     } else if (chartId === 'rainChart') {
