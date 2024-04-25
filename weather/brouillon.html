@@ -1,114 +1,114 @@
-/* Réinitialisation et styles de base */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to bottom, #007FFF 0%, #00BFFF 100%);
-    color: #333;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-header {
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.5);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    font-size: 24px;
-    color: #333;
-}
-
-#logo_site {
-    width: 80px;
-    height: 60px;
-    margin-right: 10px;
-}
-
-.site-name {
-    font-size: 24px;
-    margin-left: 10px;
-    color: #333;
-}
-
-.nav_links {
-    list-style: none;
-    display: flex;
-}
-
-.nav_links li {
-    display: inline-block;
-    padding: 0px 20px; /* Adjust spacing between elements */
-}
-
-.nav_links a {
-    transition: all 0.3s ease 0s;
-    color: #333;
-    margin: 15px;
-    text-decoration: none;
-}
-
-.nav_links a:hover, .cta button:hover {
-    color: #017cff;
-    text-decoration: underline;
-}
-
-.button-container, .contact-form button {
-    display: flex;
-    align-items: center;
-    gap: 28px; 
-}
-
-.cta button, .contact-form button[type="submit"] {
-    padding: 9px 20px; /* Matching button sizes */
-    background-color: rgba(1, 124, 255, 0.75);
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
-}
-
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: cyan;
-    width: 100%;
-    margin-top: auto;
-}
-
-/* Weather widgets side by side */
-#openweathermap-widget-1, #openweathermap-widget-2, #openweathermap-widget-3,
-#openweathermap-widget-4, #openweathermap-widget-5, #openweathermap-widget-13,
-#openweathermap-widget-14, #openweathermap-widget-15, #openweathermap-widget-16 {
-    display: inline-block; /* Align widgets side by side */
-    margin: 10px; /* Space between widgets */
-}
-
-@media (max-width: 768px) {
-    .nav_links, .button-container {
-        flex-direction: column;
-        align-items: center;
+<script>// Fonction pour afficher les favoris de l'utilisateur et supprimer
+function displayUserFavorites() {
+    const token = localStorage.getItem('jwtToken');
+    if (!token) {
+        return; 
     }
 
-    .weather-widgets, .contact-form {
-        flex-direction: column;
-        align-items: center;
-    }
+    fetch(`${apiUrl}/favoris`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Réponse non valide du backend');
+        }
+        return response.json();
+    })
+    .then(data => {
+        const userFavoritesList = document.getElementById('user-favorites-list');
+        userFavoritesList.innerHTML = '';
+        data.forEach(favorite => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${favorite.city}, ${favorite.country}`; 
+            const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Supprimer';
+                deleteButton.addEventListener('click', function() {
+                    deleteFavorite(favorite);
+                });
+                listItem.appendChild(deleteButton);
+            userFavoritesList.appendChild(listItem);
+        });
+    })
+    .catch(error => {
+        console.error('Erreur lors de la récupération des favoris de l\'utilisateur:', error);
+        
+    });
+}
 
-    .nav_links li, .button-container {
-        padding: 10px;
-    }
+// Ajouter un favori lorsque l'utilisateur soumet le formulaire
+document.getElementById('add-favorites-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Empêche le formulaire de soumettre normalement
+    const city = document.getElementById('favorite-city').value;
+    const country = document.getElementById('favorite-country').value;
+    addFavorite(city, country);
+});
+
+
+/* Fonction pour ajouter un favori
+function addFavorite(cityName) {
+    const token = localStorage.getItem('jwtToken');
+    fetch(`${apiUrl}/addFavorite`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ cityName: cityName })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Favori ajouté avec succès', data);
+        displayUserFavorites(); // Rafraîchir la liste des favoris après l'ajout réussi
+    })
+    .catch(error => console.error('Erreur lors de l\'ajout du favori:', error));
+}*/
+
+// Appel initial pour afficher les favoris de l'utilisateur au chargement de la page
+displayUserFavorites();
+
+function deleteFavorite(favorite) {
+    fetch(`${apiUrl}/removeFavorite`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            userId: favorite.userId,
+            city: favorite.city,
+            country: favorite.country
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erreur lors de la suppression du favori');
+        }
+        // Mettre à jour l'affichage des favoris après la suppression réussie
+        displayUserFavorites();
+    })
+    .catch(error => console.error('Erreur lors de la suppression du favori:', error));
+}
+
+function addFavorite(city, country) {
+   
+    fetch(`${apiUrl}/addFavorite`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            city: city,
+            country: country
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erreur lors de l\'ajout du favori');
+        }
+        // Mettre à jour l'affichage des favoris après l'ajout réussi
+        displayUserFavorites();
+    })
+    .catch(error => console.error('Erreur lors de l\'ajout du favori:', error));
 }

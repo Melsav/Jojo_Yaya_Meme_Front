@@ -5,7 +5,7 @@ function fetchWithAuth(url, options = {}) {
     const headers = {
         ...options.headers,
         'Authorization': token ? `Bearer ${token}` : '',
-        'Content-Type': 'application/json'  // Adding this to ensure JSON is handled correctly
+        'Content-Type': 'application/json' 
     };
     return fetch(url, { ...options, headers });
 }
@@ -14,7 +14,7 @@ function handleResponse(response) {
     if (!response.ok) {
         throw new Error('  vous devez vous connecter ok');
     }
-    return response.json();  // This ensures the function returns a promise that resolves with the JSON data
+    return response.json();  
 }
 
 function displaySearchHistory() {

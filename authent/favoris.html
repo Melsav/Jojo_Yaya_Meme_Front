@@ -6,6 +6,10 @@
     <title>Découvrez les tendances météo</title>
     <link rel="stylesheet" href="style_favoris.css">
     <link rel="icon" href="../authent/logoo-removebg-preview.png" type="image/png">
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone-with-data-10-year-range.min.js"></script>
+
 </head>
 
 <body>
@@ -23,8 +27,8 @@
             </ul>
         </nav>
         <div class="button-container">
-            <a class="cta" href="register.html"><button>Register</button></a>
-            <a class="cta" href="login.html"><button>Connexion</button></a>
+            <a class="cta" href="register.html"><button>s'incrire</button></a>
+            <a class="cta" href="login.html"><button>se connecter</button></a>
         </div>
     </header>
     
@@ -46,9 +50,21 @@
                 <li>le top 3</li>
             </ul>
         </article>
+        <button id="view-favorites-btn">Voir mes Favoris</button>
+
+
+        <div id="login-message" style="display: none;">Vous devez être connecté pour voir vos favoris.</div>
         
-        <section id="user-favorites">
+    
+        <section id="favorites-section" style="display: none;">
             <h2>Mes favoris</h2>
+            <form id="add-favorites-form">
+                <input type="text" id="favorite-city" placeholder="Entrez une ville favorite">
+
+                <input type="text" id="favorite-country" placeholder="Entrez le pays">
+
+                <button type="submit">Ajouter</button>
+            </form>
             <ul id="user-favorites-list"></ul>
         </section>
     </main>

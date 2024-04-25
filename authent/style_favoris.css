@@ -108,7 +108,7 @@ main {
     text-align: center;
 }
 
-h1,
+
 h2 {
     margin-bottom: 20px;
     text-align: center;
@@ -135,4 +135,82 @@ ul li:last-child {
     border-radius: 10px;
     margin-bottom: 20px;
     font-weight: bold;
+}
+/* Style du bouton "Voir Mes Favoris" */
+#view-favorites-btn {
+    background-color: #4169e1; /* Bleu royal */
+    color: #fff; /* Blanc */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+#view-favorites-btn:hover {
+    background-color: #1e90ff; /* Bleu dodger */
+}
+
+/* Style du message de connexion */
+#login-message {
+    color: #333; /* Noir */
+    margin-bottom: 10px;
+}
+
+/* Style de la section des favoris */
+#favorites-section {
+    display: none;
+    background-color: #f0f8ff; /* Bleu clair */
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+
+#favorites-section h2 {
+    color: #4169e1; /* Bleu royal */
+    margin-bottom: 15px;
+}
+
+#add-favorites-form input[type="text"] {
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+#add-favorites-form button {
+    padding: 10px 20px;
+    background-color: #4169e1; /* Bleu royal */
+    color: #fff; /* Blanc */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#add-favorites-form button:hover {
+    background-color: #1e90ff; /* Bleu dodger */
+}
+
+#user-favorites-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#user-favorites-list li {
+    margin-bottom: 10px;
+}
+
+#user-favorites-list li button {
+    background-color: #ddd; /* Gris clair */
+    color: #333; /* Noir */
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+#user-favorites-list li button:hover {
+    background-color: #ccc; /* Gris un peu plus foncé */
 }
