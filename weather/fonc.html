@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Graphiques Météo avec OpenWeather API</title>
+    <link rel="stylesheet" href="style_fonc.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+</head>
+<body>
+    <div id="climate-change-container">
+        <h2>Analyse du Changement Climatique</h2>
+        <div class="widget">
+            <canvas id="climateChart"></canvas>
+        </div>
+    </div>
+    <div class="button-ctn">
+    <button onclick="redirectToAccueil()">Revenir à l'accueil</button>
+    </div>
+
+    <script>document.addEventListener('DOMContentLoaded', function() {
+        const years = Array.from({length: 30}, (_, i) => 1990 + i); 
+        const temperatures = years.map(year => Math.round((Math.random() * 2) + 13)); 
+    
+        const ctx = document.getElementById('climateChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: years,
+                datasets: [{
+                    label: 'Température Moyenne Annuelle (°C)',
+                    data: temperatures,
+                    fill: false,
+                    borderColor: 'rgb(255, 99, 132)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        title: {
+                            display: true,
+                            text: 'Température (°C)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Année'
+                        }
+                    }
+                }
+            }
+        });
+    });
+
+    function redirectToAccueil() {
+        window.location.href = "../authent/accueil.html";
+    }
+    
+    </script> 
+</body>
+</html>

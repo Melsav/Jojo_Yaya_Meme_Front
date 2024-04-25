@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Graphiques Météo avec OpenWeather API</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <!-- Inclure l'adaptateur de date pour Chart.js -->
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+        <link rel="stylesheet" href="style_fluct.css">
+    </head>
+    
+<body>
+<div id="widgets-container">
+    <div id="temp-chart-container" class="widget">
+        <canvas id="tempChart"></canvas>
+    </div>
+    <div id="rain-widget" class="widget">
+        <canvas id="rainChart"></canvas>
+    </div>
+</div>
+<div id="weather-form-container">
+    <form id="city-form">
+        <input type="text" id="city-input" placeholder="Entrez le nom d'une ville" required>
+        <button type="submit">Voir la météo</button>
+        <a href="index.html" class="button-style">Accueil</a>
+    </form>
+</div>
+
+<script>
+const apiKey = 'ae389c751139d10e6c783635a12a3b6e'; // Remplacez par votre clé API OpenWeather
+// Variables globales pour stocker les instances des graphiques
+let tempChartInstance = null;
+let rainChartInstance = null;
+
+document.getElementById('city-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // Empêche le rechargement de la page lors de la soumission du formulaire
+    const city = document.getElementById('city-input').value.trim();
+    if (city) {
+        fetchWeatherDataAndInitializeCharts(city);
+    } else {
+        alert('Veuillez entrer le nom d\'une ville.');
+    }
+});
+
+function fetchWeatherDataAndInitializeCharts(city) {
+    const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`;
+
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            if (!data.list) {
+                alert('Aucune donnée trouvée pour cette ville.');
+                return;
+            }
+
+            const labels = data.list.map(item => item.dt_txt);
+            const temps = data.list.map(item => item.main.temp);
+            const rain = data.list.map(item => item.rain && item.rain['3h'] ? item.rain['3h'] : 0);
+
+            // Appel à initializeChart pour chaque type de données
+            initializeChart('tempChart', 'Température (°C)', labels, temps, 'line', 'rgb(75, 192, 192)', tempChartInstance);
+            initializeChart('rainChart', 'Précipitations (mm)', labels, rain, 'bar', 'rgb(54, 162, 235)', rainChartInstance);
+        })
+        .catch(error => {
+            console.error('Erreur lors de la récupération des données de l\'API', error);
+            alert('Erreur lors de la récupération des données. Veuillez réessayer.');
+        });
+}
+
+function initializeChart(chartId, label, labels, data, type, borderColor, chartInstance) {
+    const ctx = document.getElementById(chartId).getContext('2d');
+    // Détruire l'instance existante si elle existe
+    if (chartInstance) {
+        chartInstance.destroy();
+    }
+    // Création d'une nouvelle instance de graphique
+    chartInstance = new Chart(ctx, {
+        type: type,
+        data: {
+            labels: labels,
+            datasets: [{
+                label: label,
+                data: data,
+                borderColor: borderColor,
+                backgroundColor: type === 'bar' ? borderColor : 'transparent',
+                borderWidth: 1,
+                fill: type === 'line',
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'day',
+                        tooltipFormat: 'dd MMM, yyyy',
+                        displayFormats: {
+                            day: 'dd MMM'
+                        }
+                    }
+                },
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    // Mettre à jour la variable globale avec la nouvelle instance
+    if (chartId === 'tempChart') {
+        tempChartInstance = chartInstance;
+    } else if (chartId === 'rainChart') {
+        rainChartInstance = chartInstance;
+    }
+}
+    
+
+</script>
+</body>
+</html>
