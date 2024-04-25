@@ -142,9 +142,15 @@
 
 <button id="next_page" type="button" onclick="redirectToNextPage()">Revenir à l'accueil</button>
 
-    <script>
+    <script> 
+    
     function redirectToNextPage() {
-    window.location.href = "../authent/login.html";
+        const token = localStorage.getItem('jwtToken');
+        if (token) {
+            window.location.href = "../authent/accueil2.html"; // Si token existe, redirige vers accueil2.html
+        } else {
+            window.location.href = "../authent/accueil.html"; // Sinon, redirige vers accueil.html
+        }
     }
     </script>
 </body>

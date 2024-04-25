@@ -1,3 +1,13 @@
+
+function fetchWithAuth(url, options = {}) {
+    const token = localStorage.getItem('jwtToken');
+    const headers = {
+        ...options.headers,
+        'Authorization': token ? `Bearer ${token}` : '',
+        'Content-Type': 'application/json' 
+    };
+    return fetch(url, { ...options, headers });
+}
 var mymap = L.map('map').setView([0, 0], 2);
 
 
@@ -51,9 +61,8 @@ function getWeatherData(lat, lon, locationName) {
                 humidity: data.main.humidity,
                 windSpeed: data.wind.speed
             };
-            return fetch('http://localhost:3000/weather/data_map', {
+            return fetchWithAuth('http://localhost:3000/weather/data_map', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(postData)
             });
         })

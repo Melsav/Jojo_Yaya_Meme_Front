@@ -61,13 +61,13 @@
     .then(data => {
         if (data.token) {
             localStorage.setItem('jwtToken', data.token); 
-            localStorage.setItem('userType', data.userType);
+            localStorage.setItem('userId', data.userID);
             const messageContainer = document.getElementById('message-container');
             messageContainer.textContent = 'Connexion réussie. Redirection...';
             messageContainer.style.color = 'green';
 
              setTimeout(() => {
-                window.location.href = '../weather/prevision_meteo.html'; // Make sure the path is correct
+                window.location.href = '../weather/prevision_meteo.html'; 
             }, 1500);
         } else {
             localStorage.setItem('userType', 'anonymous');
