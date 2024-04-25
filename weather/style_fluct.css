@@ -14,7 +14,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: start;
-    flex-wrap: wrap; /* Permet aux widgets de passer à la ligne sur les petits écrans */
+    flex-wrap: wrap; 
     width: 100%;
     max-width: 1200px;
     margin-top: 20px;
@@ -26,46 +26,46 @@ body {
     margin: 10px;
     flex: 1;
     background-color: #fff;
-    border-radius: 15px; /* Coins arrondis */
-    min-width: 300px; /* Assure une largeur minimale pour chaque widget */
+    border-radius: 15px; 
+    min-width: 300px; 
     height: 400px;
 }
 
 canvas {
     width: 100% !important;
     height: 100% !important;
-    border-radius: 15px; /* Arrondit les coins du canvas également */
+    border-radius: 15px; 
 }
 
 #weather-form-container {
     display: flex;
     justify-content: center;
-    margin-top: 20px; /* Ajustez selon l'espacement désiré après les graphiques */
+    margin-top: 20px; 
 }
 
 #city-form {
     display: flex;
     justify-content: center;
-    gap: 10px; /* Espacement entre le champ de saisie et le bouton */
+    gap: 10px; 
 }
 
 #city-input, button {
-    padding: 10px; /* Ajustez pour un meilleur rendu visuel */
-    font-size: 16px; /* Ajustez selon vos préférences */
+    padding: 10px; 
+    font-size: 16px; 
 }
 
 button {
     cursor: pointer;
-    background-color: #74ebd5; /* Couleur de fond du bouton */
+    background-color: #74ebd5; 
     border: none;
-    border-radius: 5px; /* Coins arrondis pour le bouton */
-    color: white; /* Couleur du texte du bouton */
+    border-radius: 5px; 
+    color: white; 
     padding: 10px;
     font-size: 16px;
 }
 
 button:hover {
-    background-color: #154941; /* Couleur du bouton au survol */
+    background-color: #154941; 
 }
 
 .button-style {
@@ -75,11 +75,24 @@ button:hover {
     color: white;
     text-align: center;
     border-radius: 5px;
-    text-decoration: none; /* Enlève le soulignement du lien */
-    /* Autres styles de bouton ici */
+    text-decoration: none; 
+    
+}
+
+.button-style-clim {
+
+
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #12e6de;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none; 
+
 }
 
 .button-style:hover {
     background-color: #094139;
-    /* Effet au survol ici */
+    
 }

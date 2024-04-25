@@ -51,6 +51,8 @@
         <button class="prev">Précédent</button>
         <button class="next">Suivant</button>
     </div>
+    <button class="fluct" onclick="redirectToNextPage()">Fluctuations</button>
+    
 
     <footer>
         <p>&copy; 2024 SkyMeteo. Tous droits réservés. | <a href="#">Politique de confidentialité</a> | <a href="#">Termes et conditions</a></p>
@@ -81,6 +83,10 @@
 
     function updateSliderPosition() {
         slides.style.transform = `translateX(-${currentSlide * widthOfImage}px)`;
+    }
+
+    function redirectToNextPage() {
+    window.location.href = "../weather/fluctuation.html";
     }
 </script>
 
