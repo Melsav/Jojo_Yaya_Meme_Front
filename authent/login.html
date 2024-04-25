@@ -61,12 +61,12 @@
     .then(data => {
         if (data.token) {
             localStorage.setItem('jwtToken', data.token); 
-            localStorage.setItem('userType', 'connected');
+            localStorage.setItem('userType', data.userType);
             const messageContainer = document.getElementById('message-container');
             messageContainer.textContent = 'Connexion réussie. Redirection...';
             messageContainer.style.color = 'green';
 
-            setTimeout(() => {
+             setTimeout(() => {
                 window.location.href = '../weather/prevision_meteo.html'; // Make sure the path is correct
             }, 1500);
         } else {
