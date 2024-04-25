@@ -50,25 +50,30 @@
         </section>
         <script>
 document.getElementById("signup-form").addEventListener("submit", function(event) {
-    event.preventDefault(); 
+    event.preventDefault();
 
-    
     const formData = {
         username: document.getElementById("username").value,
         email: document.getElementById("email").value,
-        city: document.getElementById("city").value,
-        country: document.getElementById("country").value,
         password: document.getElementById("password").value,
-        confirmPassword: document.getElementById("confirmPassword").value
+        confirmPassword: document.getElementById("confirmPassword").value,
+        city: document.getElementById("city").value,
+        country: document.getElementById("country").value
     };
 
-    
+    // Vérifiez si les champs sont tous remplis
+    if (!formData.username || !formData.email || !formData.password || !formData.confirmPassword || !formData.city || !formData.country) {
+        alert('Veuillez remplir tous les champs requis.');
+        return;
+    }
+
+    // Vérifiez si les mots de passe correspondent
     if (formData.password !== formData.confirmPassword) {
         alert('Les mots de passe ne correspondent pas.');
         return;
     }
 
-    
+    // Envoyer les données au serveur
     fetch('http://localhost:3000/register', {
         method: 'POST',
         headers: {
@@ -79,69 +84,14 @@ document.getElementById("signup-form").addEventListener("submit", function(event
     .then(response => response.json())
     .then(data => {
         console.log('Success:', data);
-        
         alert('Utilisateur inscrit avec succès.');
-        
         document.getElementById("signup-form").reset();
     })
     .catch((error) => {
         console.error('Error:', error);
-        
         alert('Une erreur est survenue lors de l\'inscription.');
     });
 });
-            document.getElementById('signup-form').onsubmit = function(event) {
-            event.preventDefault(); 
-
-    var form = event.target;
-    var password = form.password.value;
-    var confirmPassword = form.confirmPassword.value;
-    var messageContainer = document.getElementById('message-container');
-
-    
-    messageContainer.innerHTML = '';
-
-    if (password !== confirmPassword) {
-        messageContainer.innerHTML = '<p style="color: red;">Les mots de passe ne correspondent pas.</p>';
-        return false;
-    }
-
-    
-    var formData = {
-        username: form.username.value,
-        email: form.email.value,
-        password: password, 
-    };
-
-    
-   // const apiUrl = "http://192.168.1.36:3000";
-    const apiUrl = "http://localhost:3000";
-
-    
-    fetch(`${apiUrl}/register`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success:', data);
-        
-        messageContainer.innerHTML = '<p style="color: green;">Utilisateur inscrit avec succès.</p>';
-        form.reset(); 
-       
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-        messageContainer.innerHTML = '<p style="color: red;">Une erreur est survenue lors de l\'inscription.</p>';
-    });
-};
-
-
-
-
         </script>
     </main>
     <footer>
