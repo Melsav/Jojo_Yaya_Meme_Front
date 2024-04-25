@@ -123,15 +123,25 @@ main {
 
 footer {
     text-align: center;
-    padding: 30px 0; 
-    background-color: cyan;
-    position: relative; 
+    padding: 20px;
+    background: linear-gradient(to right, #6FC3DF, #2165A0); 
+    position: fixed;
     left: 0;
-    justify-content: center;
-    align-items: center;
     bottom: 0;
     width: 100%;
-    min-height: 80px; 
+    font-size: 14px;
+    height: 50px;
+    color: white; 
+}
+
+footer a {
+    text-decoration: none;
+    color: white; 
+    transition: color 0.3s ease; 
+}
+
+footer a:hover {
+    color: #f1f1f1;
 }
 
 #not_reg {

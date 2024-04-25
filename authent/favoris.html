@@ -10,8 +10,9 @@
 
 <body>
     <header>
-        <img id="logo_site" src="../authent/LOGOO-removebg-preview.png" alt="Logo du site">
-        <h2 class="site-name">SkyMétéo</h2> 
+            <img id="logo_site" src="../authent/LOGOO-removebg-preview.png" alt="Logo du site">
+            <h2 class="site-name">SkyMétéo</h2>
+        
         <nav>
             <ul class="nav_links">
                 <li><a href="../authent/accueil.html">Accueil</a></li>
@@ -26,29 +27,34 @@
             <a class="cta" href="login.html"><button>Connexion</button></a>
         </div>
     </header>
-    <main>
-        <h1>Les pays les plus consultées pour la météo sur skyMétéo! !</h1>
-        <ul id="most-clicked-countries" class ="cadre-blanc">
-            <li> le top 1</li>
-            <li> le top 2</li>
-            <li> le top 3</li>
-        </ul>
     
-        <h1>Les villes les plus consultées pour la météo sur skyMétéo!</h1>
-        <ul id="most-clicked-cities" class = "cadre-blanc">
-            <li>le top 1</li>
-            <li>le top 2</li>
-            <li> le top 3</li>
-        </ul>
+    <main>
+        <article>
+            <h2>Les pays les plus consultées pour la météo sur SkyMétéo!</h2>
+            <ul id="most-clicked-countries" class="cadre-blanc">
+                <li>le top 1</li>
+                <li>le top 2</li>
+                <li>le top 3</li>
+            </ul>
+        </article>
+        
+        <article>
+            <h2>Les villes les plus consultées pour la météo sur SkyMétéo!</h2>
+            <ul id="most-clicked-cities" class="cadre-blanc">
+                <li>le top 1</li>
+                <li>le top 2</li>
+                <li>le top 3</li>
+            </ul>
+        </article>
+        
+        <section id="user-favorites">
+            <h2>Mes favoris</h2>
+            <ul id="user-favorites-list"></ul>
+        </section>
     </main>
 
-    <section id="user-favorites">
-        <h1>Mes favoris</h1>
-        <ul id="user-favorites-list"></ul>
-    </section>
-
     <footer>
-        <p>&copy; 2024 MétéoApp. Tous droits réservés.</p>
+        <p>&copy; 2024 SkyMeteo. Tous droits réservés. | <a href="#">Politique de confidentialité</a> | <a href="#">Termes et conditions</a></p>
     </footer>
     <script src="script_favoris.js"></script>
 </body>

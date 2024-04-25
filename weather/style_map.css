@@ -121,6 +121,7 @@ nav {
     display: flex;
     align-items: center;
     gap: 28px;
+    margin-right: 20px;
 }
 
 .cta button {
@@ -138,11 +139,23 @@ nav {
 
 footer {
     text-align: center;
-    padding: 5px;
-    background-color: cyan;
+    padding: 20px;
+    background: linear-gradient(to right, #6FC3DF, #2165A0); 
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
-    z-index: 1; 
+    font-size: 14px;
+    height: 30px;
+    color: white; 
+}
+
+footer a {
+    text-decoration: none;
+    color: white; 
+    transition: color 0.3s ease; 
+}
+
+footer a:hover {
+    color: #f1f1f1;
 }
