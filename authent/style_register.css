@@ -50,6 +50,7 @@ header {
     align-items: center;
     gap: 28px;
 }
+
 .cta_ button {
 
     padding: 9px 25px;
@@ -77,11 +78,12 @@ header {
 
 .signup-form {
     background-color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 80px;
     max-width: 400px;
     margin: 50px auto;
     padding: 30px;
     border-radius: 8px;
-    margin-top: 30px;
+    padding-top: 15px;
 }
 
 .signup-form h2 {
@@ -117,11 +119,24 @@ header {
 footer {
     text-align: center;
     padding: 20px;
-    background-color: cyan;
+    background: linear-gradient(to right, #6FC3DF, #2165A0); 
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
+    font-size: 14px;
+    height: 50px;
+    color: white; 
+}
+
+footer a {
+    text-decoration: none;
+    color: white; 
+    transition: color 0.3s ease; 
+}
+
+footer a:hover {
+    color: #f1f1f1;
 }
 
 #already_reg {

@@ -124,7 +124,22 @@ header {
 footer {
     text-align: center;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.9); 
+    background: linear-gradient(to right, #6FC3DF, #2165A0); 
+    position: fixed;
+    left: 0;
+    bottom: 0;
     width: 100%;
-    margin-top: auto;
+    font-size: 14px;
+    height: 50px;
+    color: white; 
+}
+
+footer a {
+    text-decoration: none;
+    color: white; 
+    transition: color 0.3s ease; 
+}
+
+footer a:hover {
+    color: #f1f1f1;
 }

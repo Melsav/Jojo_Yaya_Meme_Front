@@ -6,9 +6,9 @@
 
 body {
     font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #007FFF 0%, #00BFFF 100%);
     background-size: cover;
     background-position: center;
-    background: linear-gradient(to bottom, #007FFF 0%, #00BFFF 100%);
 }
 
 header {
@@ -17,26 +17,17 @@ header {
     align-items: center;
     height: 74px;
     background-color: rgba(255, 255, 255, 0.5);
-    position: fixed;
-    width: 100%;
-    top: 0;
 }
-
-.logo {
-    display: flex;
-    align-items: center;
-    font-size: 24px;
-    color: #333;
-    margin-top: 20px; 
-    margin-left: 20px; 
-}
-
 
 
 nav {
     display: flex;
 }
 
+.site-name {
+
+    margin-top: 20px;
+}
 .nav_links {
     list-style: none;
     display: flex;
@@ -61,6 +52,7 @@ nav {
     display: flex;
     align-items: center;
     gap: 28px; 
+    margin-right: 20px;
 }
 
 .cta button {
@@ -76,17 +68,29 @@ nav {
     background-color: rgba(1, 124, 255, 1);
 }
 
-
-
 footer {
     text-align: center;
     padding: 20px;
-    background-color: cyan;
+    background: linear-gradient(to right, #6FC3DF, #2165A0); 
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
+    font-size: 14px;
+    height: 50px;
+    color: white; 
 }
+
+footer a {
+    text-decoration: none;
+    color: white; 
+    transition: color 0.3s ease; 
+}
+
+footer a:hover {
+    color: #f1f1f1;
+}
+
 
 #logo_site {
     width: 100px;
@@ -94,25 +98,9 @@ footer {
     margin-left: 15px;
 }
 
-
-ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-ul li {
-    padding: 10px 0;
-  
-    font-size: 18px;
-}
-
-ul li:last-child {
-    border-bottom: none;
-}
-
 main {
-    padding-top: 90px; 
+    padding-top: 40px; 
+    padding-bottom: 60px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -120,13 +108,9 @@ main {
     text-align: center;
 }
 
-h1 {
-    margin-bottom: 20px;
-    text-align: center;
-}
-
+h1,
 h2 {
-    margin-top: 0px;
+    margin-bottom: 20px;
     text-align: center;
 }
 
@@ -144,7 +128,6 @@ ul li {
 ul li:last-child {
     border-bottom: none;
 }
-
 
 .cadre-blanc {
     background-color: #c5e6f0;
