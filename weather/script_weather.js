@@ -12,7 +12,7 @@ function fetchWithAuth(url, options = {}) {
 
 function handleResponse(response) {
     if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error('  vous devez vous connecter ok');
     }
     return response.json();  // This ensures the function returns a promise that resolves with the JSON data
 }
@@ -26,7 +26,7 @@ function displaySearchHistory() {
             console.log("Données météorologiques reçues:", data);
             data.forEach(item => {
                 const listItem = document.createElement('li');
-                const text = `Ville: ${item.city}, Température: ${item.temperature}°C, Date: ${item.created_at}, Utilisateur: ${item.userType}`;
+                const text = `Ville: ${item.city}, Température: ${item.temperature}°C, Date: ${item.created_at}`;
                 listItem.textContent = text;
                 searchHistory.appendChild(listItem);
             });
