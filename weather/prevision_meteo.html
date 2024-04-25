@@ -36,19 +36,25 @@
     
 
         <script>
-           // const apiUrl = "http://192.168.1.36:3000";
             const apiUrl = "http://localhost:3000";
-
+        
+            function fetchWithAuth(url, options = {}) {
+                const token = localStorage.getItem('jwtToken');
+                const headers = {
+                    ...options.headers,
+                    'Authorization': token ? `Bearer ${token}` : ''
+                };
+                return fetch(url, { ...options, headers });
+            }
+        
             function addToSearchHistory(cityName, weatherDetails) {
-                const sessionID = generateSessionID(); 
-
-                
                 fetch(`${apiUrl}/weather/history`, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`
                     },
-                    body: JSON.stringify({ sessionID: sessionID, city: cityName, details: weatherDetails, userType }) 
+                    body: JSON.stringify({city: cityName, details: weatherDetails}) 
                 })
                 .then(response => {
                     if (!response.ok) {
@@ -60,17 +66,11 @@
                     console.error('Erreur lors de l\'enregistrement de la ville et des détails météo dans l\'historique', error);
                 });
             }
-
-            
-            function generateSessionID() {
-                
-                return 'session_id_123';
-            }
-
+        
             function getForecast() {
-                var cityName = document.getElementById('city-input').value;
+                const cityName = document.getElementById('city-input').value;
                 const apiKey = 'ae389c751139d10e6c783635a12a3b6e';
-
+        
                 fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&units=metric&lang=fr&appid=${apiKey}`)
                     .then(response => {
                         if (!response.ok) {
@@ -80,15 +80,13 @@
                     })
                     .then(data => {
                         displayForecast(data); 
-
-                        const now = new Date();
-                        const tomorrow = new Date(now);
-                        tomorrow.setDate(now.getDate() + 1);
+                        const tomorrow = new Date();
+                        tomorrow.setDate(new Date().getDate() + 1);
                         const indexTomorrow = data.list.findIndex(forecast => {
                             const forecastDate = new Date(forecast.dt_txt);
                             return forecastDate.getDate() === tomorrow.getDate();
                         });
-
+        
                         if (indexTomorrow !== -1) {
                             const details = {
                                 temp: data.list[indexTomorrow].main.temp,
@@ -101,69 +99,53 @@
                         console.error('Erreur lors de la récupération des données de prévision', error);
                     });
             }
-
+        
             function displayForecast(data) {
-                var forecastContainer = document.getElementById('forecast-container');
+                const forecastContainer = document.getElementById('forecast-container');
                 forecastContainer.innerHTML = '';
-
-                var dailyForecasts = groupByDay(data.list);
-
-                var daysToShow = Object.keys(dailyForecasts).slice(1, 6);
-
-                var lavenderColors = ['#4B0082', '#8A2BE2', '#9400D3', '#8A2BE2', '#8A2BE2'];
-
-
+                const dailyForecasts = groupByDay(data.list);
+                const daysToShow = Object.keys(dailyForecasts).slice(1, 6);
+                const lavenderColors = ['#4B0082', '#8A2BE2', '#9400D3', '#8A2BE2', '#8A2BE2'];
+        
                 daysToShow.forEach((day, index) => {
                     setTimeout(() => {
-                        var forecastElement = document.createElement('div');
+                        const forecastElement = document.createElement('div');
                         forecastElement.classList.add('day-forecast');
-
-                        var averageTemp = calculateAverageTemp(dailyForecasts[day]);
-
-                        var gradientColorStart = lavenderColors[index % lavenderColors.length];
-                        var gradientColorEnd = lavenderColors[(index + 1) % lavenderColors.length];
-                        forecastElement.style.background = `linear-gradient(to bottom, ${gradientColorStart}, ${gradientColorEnd})`;
-
-                        forecastElement.innerHTML = `
-                            <strong style="font-size: 1.2em;">${day}</strong>
-                            <div style="margin-top: 8px;">
-                                ${dailyForecasts[day][0].weather[0].description}, ${averageTemp} °C
-                            </div>
-                        `;
+                        const averageTemp = calculateAverageTemp(dailyForecasts[day]);
+                        forecastElement.style.background = `linear-gradient(to bottom, ${lavenderColors[index % lavenderColors.length]}, ${lavenderColors[(index + 1) % lavenderColors.length]})`;
+                        forecastElement.innerHTML = `<strong style="font-size: 1.2em;">${day}</strong><div style="margin-top: 8px;">${dailyForecasts[day][0].weather[0].description}, ${averageTemp} °C</div>`;
                         forecastContainer.appendChild(forecastElement);
-
                         forecastElement.style.opacity = 1;
                     }, index * 500); 
                 });
             }
-
+        
             function groupByDay(forecasts) {
                 return forecasts.reduce((grouped, forecast) => {
-                    var date = new Date(forecast.dt * 1000);
-                    var day = date.toLocaleDateString('fr-FR', { weekday: 'long' });
-
+                    const date = new Date(forecast.dt * 1000);
+                    const day = date.toLocaleDateString('fr-FR', { weekday: 'long' });
                     if (!grouped[day]) {
                         grouped[day] = [];
                     }
-
                     grouped[day].push(forecast);
                     return grouped;
                 }, {});
             }
-
+        
             function calculateAverageTemp(forecasts) {
-                var totalTemp = forecasts.reduce((sum, forecast) => sum + forecast.main.temp, 0);
+                const totalTemp = forecasts.reduce((sum, forecast) => sum + forecast.main.temp, 0);
                 return (totalTemp / forecasts.length).toFixed(1);
             }
         </script>
-    </div>
+        
+</div>
 
-    <button id="next_page" type="button" onclick="redirectToNextPage()">Revenir à l'accueil</button>
+<button id="next_page" type="button" onclick="redirectToNextPage()">Revenir à l'accueil</button>
 
     <script>
-        function redirectToNextPage() {
-            window.location.href = "../authent/login.html";
-        }
+    function redirectToNextPage() {
+    window.location.href = "../authent/login.html";
+    }
     </script>
 </body>
 </html>

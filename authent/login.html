@@ -44,45 +44,37 @@
         <p>&copy; 2024 MétéoApp. Tous droits réservés.</p>
     </footer>
     <script>
-        
         document.getElementById('login-form').addEventListener('submit', function(event) {
     event.preventDefault();
-
     const formData = {
         email: this.email.value,
         password: this.password.value,
     };
-
-   // const apiUrl = "http://192.168.1.36:3000";
-   const apiUrl = "http://localhost:3000";
+    const apiUrl = "http://localhost:3000"; 
 
     fetch(`${apiUrl}/login`, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(formData),
     })
-    .then(response => {
-        if (response.ok) {
-            return response.json();
+    .then(response => response.json())
+    .then(data => {
+        if (data.token) {
+            localStorage.setItem('jwtToken', data.token); 
+            localStorage.setItem('userType', 'connected');
+            const messageContainer = document.getElementById('message-container');
+            messageContainer.textContent = 'Connexion réussie. Redirection...';
+            messageContainer.style.color = 'green';
+
+            setTimeout(() => {
+                window.location.href = '../weather/prevision_meteo.html'; // Make sure the path is correct
+            }, 1500);
         } else {
-            throw new Error('Email ou mot de passe incorrect.');
+            localStorage.setItem('userType', 'anonymous');
+            throw new Error(data.message || 'Erreur de connexion.');
         }
     })
-    .then(data => {
-        
-        const messageContainer = document.getElementById('message-container');
-        messageContainer.textContent = 'Connexion réussie. Redirection...';
-        messageContainer.style.color = 'green';
-
-        
-        setTimeout(() => {
-            window.location.href = '../weather/prevision_meteo.html';
-        }, 1500);
-    })
     .catch((error) => {
-        
         const messageContainer = document.getElementById('message-container');
         messageContainer.textContent = error.message;
         messageContainer.style.color = 'red';
