@@ -92,7 +92,7 @@ button:hover {
 
 }
 
-.button-style:hover {
+.button-style:hover, .button-style-clim:hover {
     background-color: #094139;
     
 }
