@@ -120,12 +120,12 @@ document.getElementById("signup-form").addEventListener("submit", function(event
             })
             .then(data => {
                 console.log('Registration successful:', data);
-                // Optionally, redirect to another page after successful registration
+            
                 window.location.href = '/login.html';
             })
             .catch(error => {
                 console.error('Error during registration:', error);
-                // Display error message to the user or handle it as needed
+            
             });
         });
     </script>

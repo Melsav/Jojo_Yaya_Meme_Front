@@ -26,12 +26,11 @@
                 <li><a href="../spaces/home.html">Météo Spatiale</a></li>
                 <li><a href="../weather/map.html">Map</a></li>
                 <li><a href="favoris.html">Favoris</a></li>
+                <li><a href="profil.html">Profil</a></li>
+
             </ul>
         </nav>
-        <div class="button-container">
-            <a class="cta" href="register.html"><button>S'inscrire</button></a>
-            <a class="cta" href="login.html"><button>Se connecter</button></a>
-        </div>
+        
     </header>
     <div class="weather-widgets">
     <div id="openweathermap-widget-1"></div>
@@ -76,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupWeatherWidget(14, '3031582', 'openweathermap-widget-4'); // Bordeaux
     setupWeatherWidget(14, '2972315', 'openweathermap-widget-13'); // Toulouse
     setupWeatherWidget(14, '2990968', 'openweathermap-widget-14'); // Nantes
-    setupWeatherWidget(14, '2988507', 'openweathermap-widget-5'); // Toulouse
+  
     setupWeatherWidget(14, '2972328', 'openweathermap-widget-15'); // reste a definir
     setupWeatherWidget(14, '2998324', 'openweathermap-widget-16'); // reste a definir
     setupWeatherWidget(14, '2994160', 'openweathermap-widget-6'); // reste a definir
@@ -89,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="feedback-section">
         <h2>Envoyez-nous vos commentaires</h2>
         <form id="feedback-form">
-            <textarea required></textarea>
+            <input type="text" id="comment" name="comment" placeholder="Commentaire" required>
             <button id="btn" type="submit">Envoyer</button>
         </form>
     </div>
@@ -123,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error('Réponse non valide du backend');
+          //   throw new Error('Réponse non valide du backend');
         }
         return response.json();
     })
@@ -264,7 +263,39 @@ document.getElementById('popup-fermeture').addEventListener('click', function(e)
         }
         });
 
-    
+        document.getElementById("feedback-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    if(localStorage.getItem("userId")){userId = localStorage.getItem("userId")}
+    else{userId = 0}
+    const formData = {
+        comment: document.getElementById("comment").value,
+        id: userId
+    };
+
+    // Vérifiez si les champs sont tous remplis
+    if (!comment) {
+        alert('Veuillez remplir tous les champs requis.');
+        return;}
+
+        fetch('http://localhost:3000/commentary', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        alert('Commentaire envoyé avec succès.');
+        document.getElementById("feedback-form").reset();
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        alert('Une erreur est survenue lors de l\'envoie.');
+    });
+});
     </script>
 </body>
 </html>

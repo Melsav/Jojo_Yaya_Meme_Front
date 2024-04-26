@@ -29,6 +29,11 @@ header {
     align-items: center;
 }
 
+.weather-widgets{
+    position: absolute;
+    top: 210px;
+}
+
 .nav_links li {
     padding: 0px 40px; 
     margin-right: 20px;
@@ -95,16 +100,17 @@ header {
 .feedback-section {
     margin-top: 40px; 
     text-align: center;
+    position: absolute;
+    top : 60px;
 }
 
 .feedback-section h2 {
     margin-bottom: 20px; 
 }
 
-.feedback-section textarea {
+.feedback-section input {
     width: 100%; 
-    padding: 10px; 
-    margin-bottom: 10px; 
+
 }
 
 #btn {

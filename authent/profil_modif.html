@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enregistrement Compte</title>
+    <title>Modification des informations</title>
     <link rel="stylesheet" href="style_register.css">
 </head>
 <body>
@@ -11,17 +11,16 @@
         <img id="logo_site" src="LOGOO-removebg-preview.png"/>
         <nav>
             <ul class="nav_links">
-                <li><a href="../authent/accueil.html">Accueil</a></li>
+                <li><a href="../authent/accueil2.html">Accueil</a></li>
                 <li><a href="../weather/prevision_meteo.html">Prévisions</a></li>
                 <li><a href="../spaces/home.html">Météo Spatiale</a></li>
                 <li><a href="../weather/map.html">Map</a></li>
                 <li><a href="favoris.html">Favoris</a></li>
+                <li><a href="profil.html">Profil</a></li>
+
             </ul>
         </nav>
-        <div class="button-container">
-            <a class="cta_" href="register.html"><button>Register</button></a>
-            <a class="cta" href="login.html"><button>Connexion</button></a>
-        </div>
+        
         <div class="menu-toggle" id="mobile-menu">
             <span class="bar"></span>
             <span class="bar"></span>
@@ -31,7 +30,7 @@
     <main>
         <section class="signup-form">
             <div id="message-container"></div>
-            <h2 id="create">Créez votre compte</h2>
+            <h2 id="create">Modifier mon profil</h2>
             
             
             <form id="signup-form" method="POST">
@@ -41,7 +40,7 @@
                 <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmez le mot de passe" required>
                 <input type="text" id="city" name="city" placeholder="Ville" required>
                 <input type="text" id="country" name="country" placeholder="Pays" required>
-                <button type="submit">Créer mon compte</button>
+                <button type="submit">Modifier mes informations</button>
             </form>
             </form>
         </section>
@@ -59,7 +58,7 @@ document.getElementById("signup-form").addEventListener("submit", function(event
         country: document.getElementById("country").value
     };
 
-    // Vérifiez si les champs sont tous remplis
+
     
 
     // Vérifiez si les mots de passe correspondent
@@ -117,12 +116,12 @@ document.getElementById("signup-form").addEventListener("submit", function(event
             })
             .then(data => {
                 console.log('Registration successful:', data);
-                // Optionally, redirect to another page after successful registration
+                
                 window.location.href = '/login.html';
             })
             .catch(error => {
                 console.error('Error during registration:', error);
-                // Display error message to the user or handle it as needed
+               
             });
         });
     </script>

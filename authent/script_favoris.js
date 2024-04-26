@@ -133,14 +133,14 @@ function addFavorite(city, country) {
     })
     .then(response => {
         if (!response.ok) {
-            // Throw an error if the response status is not ok
+           
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         return response.text(); 
     })
     .then(text => {
         try {
-            const data = JSON.parse(text); // Try parsing text to JSON
+            const data = JSON.parse(text); 
             console.log('Favori ajouté avec succès', data);
             displayUserFavorites(); 
         } catch (e) {
