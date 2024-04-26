@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Utilisateur</title>
+    <link rel="stylesheet" href="style_profil.css"> <!-- Assurez-vous de créer un fichier de style pour le profil -->
+</head>
+<body>
+    <header>
+        <img id="logo_site" src="LOGOO-removebg-preview.png"/>
+        <nav>
+            <ul class="nav_links">
+                <li><a href="#">Accueil</a></li>
+                <li><a href="../weather/prevision_meteo.html">Prévisions</a></li>
+                <li><a href="../spaces/home.html">Météo Spatiale</a></li>
+                <li><a href="../weather/map.html">Map</a></li>
+                <li><a href="../weather/history.html">Historique</a></li>
+            </ul>
+        </nav>
+        <div class="button-container">
+            <a class="cta_" href="logout.html"><button>Déconnexion</button></a> <!-- Lien pour se déconnecter -->
+        </div>
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </header>
+    <main>
+        
+         <div class="user-profile">
+            <div class="user username">
+                <!-- Emplacement pour afficher le nom et prénom de l'utilisateur -->
+                <h1 id="username">Nom Prénom</h1>
+                <!-- Vous pouvez ajouter d'autres informations ici -->
+            </div>
+            <div class="user email">
+                <!-- Emplacement pour afficher le nom et prénom de l'utilisateur -->
+                <h1 id="email">Adresse email</h1>
+                <!-- Vous pouvez ajouter d'autres informations ici -->
+            </div>
+            <div class="user city">
+                <!-- Emplacement pour afficher le nom et prénom de l'utilisateur -->
+                <h1 id="city">Ville</h1>
+                <!-- Vous pouvez ajouter d'autres informations ici -->
+            </div>
+            <div class="user country">
+                <!-- Emplacement pour afficher le nom et prénom de l'utilisateur -->
+                <h1 id="country">Pays</h1>
+                <!-- Vous pouvez ajouter d'autres informations ici -->
+            </div>
+            <div class="user creation_date">
+                <!-- Emplacement pour afficher le nom et prénom de l'utilisateur -->
+                <h1 id="creation_date">Date de création du compte</h1>
+                <!-- Vous pouvez ajouter d'autres informations ici -->
+            </div>
+            <a href="./profil_modif.html">Click here to visit Example</a>
+
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 MétéoApp. Tous droits réservés.</p>
+    </footer>
+    <script>
+        
+
+
+        // JavaScript pour récupérer les informations de l'utilisateur et les afficher
+        document.addEventListener('DOMContentLoaded', function() {
+          const userId = localStorage.getItem("userId"); // Replace 123 with the actual idUser value
+            console.log(userId)
+            fetch('http://localhost:3000/getData', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ userId: userId })
+    })
+        .then(response => {
+            if (!response.ok) {
+            throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Data received from server:', data);
+            document.getElementById('username').textContent = data.username;
+            document.getElementById('email').textContent = data.email;
+            document.getElementById('city').textContent = data.city;
+            document.getElementById('country').textContent = data.country;
+            document.getElementById('creation_date').textContent = data.created_at;
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+        });
+    </script>
+</body>
+</html>

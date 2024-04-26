@@ -142,14 +142,14 @@
 
 <button id="next_page" type="button" onclick="redirectToNextPage()">Revenir à l'accueil</button>
 
-    <script> 
-    
+    <script>
+    console.log("1", localStorage.getItem('jwtToken'))
+
     function redirectToNextPage() {
-        const token = localStorage.getItem('jwtToken');
-        if (token) {
-            window.location.href = "../authent/accueil2.html"; // Si token existe, redirige vers accueil2.html
-        } else {
-            window.location.href = "../authent/accueil.html"; // Sinon, redirige vers accueil.html
+        if(localStorage.getItem('jwtToken') != null){
+            window.location.href = "../authent/accueil2.html";
+        }else{
+            window.location.href = "../authent/accueil.html";
         }
     }
     </script>

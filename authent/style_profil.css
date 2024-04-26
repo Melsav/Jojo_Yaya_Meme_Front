@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%; 
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    background-image: url('background.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background: linear-gradient(to bottom, #007FFF 0%, #00BFFF 100%);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 74px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.nav_links {
+    list-style: none;
+}
+
+.nav_links li {
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.nav_links li a {
+    transition: all 0.3s ease 0s;
+    color: #333;
+    text-decoration: none;
+    margin: 15px;
+}
+
+.nav_links li a:hover {
+    color: #017cff;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    gap: 28px; /* Espacement entre les boutons */
+}
+
+.cta_ button,
+.cta button {
+    padding: 9px 25px;
+    background-color: rgba(1, 124, 255, 0.75);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.cta button:hover {
+    background-color: rgba(1, 124, 255, 1);
+}
+
+main {
+    width: 100%;
+    padding-bottom: 60px; 
+}
+
+footer {
+    text-align: center;
+    padding: 30px 0; /* Vertical padding set explicitly */
+    background-color: cyan;
+    position: absolute; /* Ou 'fixed', si le footer doit rester visible à tout moment */
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+    width: 100%;
+    min-height: 80px; /* Hauteur minimale du footer pour augmenter sa taille */
+}
+
+#logo_site {
+    width: 100px;
+    height: 80px;
+    margin-left: 15px;
+}
+
+
+
+.user-profile {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+
+.profile-picture img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.user {
+    text-align: center;
+}
+
+.user h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Ajoutez d'autres styles au besoin pour les autres informations de profil */
+
